@@ -86,14 +86,14 @@ handleInput() {
     
   this.timer = true
   this.input = true;
-  this.btncolor = 'bg-green-600 hover:bg-green-700'
+  this.btncolor = 'bg-green-600 hover:bg-green-700';
+  this.isDisabled = !this.isDisabled;
 
       }else{
   this.btncolor = 'bg-red-600 hover:bg-red-700'
       }
 
       setTimeout(() => { this.timer = false;
-       this.isDisabled = !this.isDisabled;
        this.input = !this.input;
        this.resend = true},  5 * 1000);
     },
@@ -102,12 +102,10 @@ handleInput() {
       this.resend = false,
       this.timer = true,
       this.input = true,
-      this.isDisabled = !this.isDisabled
 
             setTimeout(() => { this.timer = false;
        this.input = !this.input;
-       this.resend = true},  5 * 1000);
-    
+       this.resend = true;},  5 * 1000); 
     },
 
 
@@ -126,7 +124,7 @@ var doc = document.getElementById('mainInput')
 
   clickevent(){
     const inputs = document.querySelectorAll('#otp > *[id]');
-  for (let i = 0; i < inputs.length; i++) {
+    for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('keydown', function(event) {
       if (event.key === "Backspace") {
         inputs[i].value = '';
@@ -139,13 +137,19 @@ var doc = document.getElementById('mainInput')
           inputs[i].value = event.key;
           if (i !== inputs.length - 1)
             inputs[i + 1].focus();
+            if(i==3){
+                      this.isDisabled = false
+                      console.log(this.isDisabled)
+            }
+            
           event.preventDefault();
-        } else if (event.keyCode > 64 && event.keyCode < 91) {
-          inputs[i].value = String.fromCharCode(event.keyCode);
-          if (i !== inputs.length - 1)
-            inputs[i + 1].focus();
-          event.preventDefault();
-        }
+        } 
+        // else if (event.keyCode > 64 && event.keyCode < 91) {
+        //   inputs[i].value = String.fromCharCode(event.keyCode);
+        //   if (i !== inputs.length - 1)
+        //     inputs[i + 1].focus();
+        //   event.preventDefault();
+        // }
       }
     });
   }
@@ -171,5 +175,6 @@ button[disabled]{
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
+  cursor: not-allowed;
 }
 </style>
