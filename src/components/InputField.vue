@@ -10,15 +10,15 @@
         <vee-field name="ist" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="ist" maxlength="1" v-on:keyup="clickevent(this,'sec')" />
         <vee-field name="snd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="sec" maxlength="1" v-on:keyup="clickevent(this,'third')" />
         <vee-field name="trd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="third" maxlength="1" v-on:keyup="clickevent(this,'fourth')" />
-        <vee-field name="fth" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="fourth" maxlength="1" />
+        <vee-field name="fth" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="fourth" maxlength="1" v-on:keyup="test()"/>
       </div>
 
       <button v-if="resend" @click="resend1()" class="text-green-400 text-right w-full">Resend code?</button>
       
-      <vue-countdown v-if="timer"  :time=" 5 * 1000" v-slot="{ minutes, seconds }">
+      <vue-countdown v-if="timer"  :time=" 60 * 5 * 1000" v-slot="{ minutes, seconds }">
   Time Remaining：{{ minutes }} minutes, {{ seconds }} seconds.
 </vue-countdown>
-      <button type="button" @click="handleInput()" :disabled = 'isDisabled'
+      <button type="button" @click="handleInput()" :disabled = "isDisabled == true" 
               class="block w-full  text-white py-1.5 px-3 rounded transition mt-2
                " :class="btncolor">
               Submit
@@ -95,7 +95,7 @@ handleInput() {
 
       setTimeout(() => { this.timer = false;
        this.input = !this.input;
-       this.resend = true},  5 * 1000);
+       this.resend = true},  60 * 5 * 1000);
     },
 
     resend1(){
@@ -105,7 +105,7 @@ handleInput() {
 
             setTimeout(() => { this.timer = false;
        this.input = !this.input;
-       this.resend = true;},  5 * 1000); 
+       this.resend = true;},  60 * 5 * 1000); 
     },
 
 
@@ -119,6 +119,10 @@ var doc = document.getElementById('mainInput')
       }else{
         this.isDisabled = true
       }
+    },
+
+    test(){
+      this.isDisabled = false
     },
 
 
@@ -137,13 +141,13 @@ var doc = document.getElementById('mainInput')
           inputs[i].value = event.key;
           if (i !== inputs.length - 1)
             inputs[i + 1].focus();
-            if(i==3){
-                      this.isDisabled = false
-                      console.log(this.isDisabled)
-            }
+            // if(i==3){
+            //           this.isDisabled = false
+            //           console.log(i)        
+            // }
             
           event.preventDefault();
-        } 
+        }
         // else if (event.keyCode > 64 && event.keyCode < 91) {
         //   inputs[i].value = String.fromCharCode(event.keyCode);
         //   if (i !== inputs.length - 1)
@@ -165,7 +169,7 @@ var doc = document.getElementById('mainInput')
 }
 
 input:invalid {
-  border-color: red !important;
+  border-color: red;
 } */
 
 
