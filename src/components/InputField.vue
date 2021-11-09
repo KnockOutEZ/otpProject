@@ -3,22 +3,27 @@
     <div class="flex flex-col justify-center items-center h-screen bg-gray-100 ">
       <vee-form :validation-schema="loginschema" class="md:w-4/12 sm:w-screen bg-gray-50 p-10 rounded-lg">
       <h1 class="font-bold text-xl mb-2">Please enter your number:</h1>
-     <vee-field placeholder="01XXXXXXXXX" name="number" type="text"  id="mainInput"  @submit="login"
+     <vee-field placeholder="01XXXXXXXXX" name="number" type="text"  id="mainInput"  @submit="login" @input="lengthHandler()"
         class="border-2 transition duration-500 placeholder-indigo-400 focus:placeholder-transparent border-indigo-400 mb-1 w-full p-2 text-left text-indigo-400 bg-transparent rounded-md focus:outline-none "/><br/>
       <ErrorMessage class="text-red-600 w-full  text-center" name="number"/>
       <div class="w-full grid grid-cols-4 gap-4 mt-2" v-if="input == true" id="otp">
-        <input class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="ist" maxlength="1" v-on:keyup="clickevent(this,'sec')">
-        <input class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="sec" maxlength="1" v-on:keyup="clickevent(this,'third')">
-        <input class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="third" maxlength="1" v-on:keyup="clickevent(this,'fourth')">
-        <input class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="fourth" maxlength="1">
+        <vee-field name="ist" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="ist" maxlength="1" v-on:keyup="clickevent(this,'sec')" />
+        <vee-field name="snd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="sec" maxlength="1" v-on:keyup="clickevent(this,'third')" />
+        <vee-field name="trd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="third" maxlength="1" v-on:keyup="clickevent(this,'fourth')" />
+        <vee-field name="fth" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="fourth" maxlength="1" />
       </div>
-      <button type="button" @click="handleInput()"
+
+      <button v-if="resend" @click="resend1()" class="text-green-400 text-right w-full">Resend code?</button>
+      
+      <vue-countdown v-if="timer"  :time=" 5 * 1000" v-slot="{ minutes, seconds }">
+  Time Remaining：{{ minutes }} minutes, {{ seconds }} seconds.
+</vue-countdown>
+      <button type="button" @click="handleInput()" :disabled = 'isDisabled'
               class="block w-full  text-white py-1.5 px-3 rounded transition mt-2
                " :class="btncolor">
               Submit
             </button>
       </vee-form>
-
       
 </div>
   </div>
@@ -26,19 +31,28 @@
 
 <script>
 // import axios from 'axios'
+import VueCountdown from '@chenfengyuan/vue-countdown';
 
 
 export default {
   name: 'HelloWorld',
     components: {
+      VueCountdown
   },
   data(){
     return{
             loginschema: {
         number: 'required|numeric|min:11|max:11',
+        ist: 'required|numeric',
+        snd: 'required|numeric',
+        trd: 'required|numeric',
+        fth: 'required|numeric',
       },
       input:false,
       btncolor: 'bg-purple-600 hover:bg-purple-700',
+      isDisabled: true,
+      timer:false,
+      resend:false,
     }
   },
 
@@ -69,7 +83,8 @@ handleInput() {
   var doc = document.getElementById('mainInput')
       const value = doc.value;
       if (value && value.length == 11) {
-        
+    
+  this.timer = true
   this.input = true;
   this.btncolor = 'bg-green-600 hover:bg-green-700'
 
@@ -77,7 +92,35 @@ handleInput() {
   this.btncolor = 'bg-red-600 hover:bg-red-700'
       }
 
-      return 
+      setTimeout(() => { this.timer = false;
+       this.isDisabled = !this.isDisabled;
+       this.input = !this.input;
+       this.resend = true},  5 * 1000);
+    },
+
+    resend1(){
+      this.resend = false,
+      this.timer = true,
+      this.input = true,
+      this.isDisabled = !this.isDisabled
+
+            setTimeout(() => { this.timer = false;
+       this.input = !this.input;
+       this.resend = true},  5 * 1000);
+    
+    },
+
+
+    lengthHandler(){
+var doc = document.getElementById('mainInput')
+      const value = doc.value;
+      if (value && value.length == 11) {
+        
+        this.isDisabled = false
+
+      }else{
+        this.isDisabled = true
+      }
     },
 
 
@@ -108,11 +151,25 @@ handleInput() {
   }
   },
 
-
 }
 }
 </script>
 
 <style scoped>
+/* input:valid {
+  border-color: green;
+}
 
+input:invalid {
+  border-color: red !important;
+} */
+
+
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
 </style>

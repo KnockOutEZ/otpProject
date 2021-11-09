@@ -36,6 +36,12 @@ import {
         validateOnBlur: true,
         validateOnChange: true,
         validateOnInput: false,
+        classes: true,
+        validity: true,
+        classNames: {
+          valid: 'is-valid',
+          invalid: 'is-invalid'
+        }
       });
     },
   };
