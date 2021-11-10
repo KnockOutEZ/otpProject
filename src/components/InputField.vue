@@ -1,24 +1,24 @@
 <template>
   <div class="parent">
     <div class="flex flex-col justify-center items-center h-screen bg-gray-100 ">
-      <vee-form :validation-schema="loginschema" class="md:w-4/12 sm:w-screen bg-gray-50 p-10 rounded-lg" @submit="login">
+      <vee-form :validation-schema="loginschema" class="md:w-4/12 sm:w-screen bg-gray-50 p-10 rounded-lg" v-on:submit="loginForm">
       <h1 class="font-bold text-xl mb-2">Please enter your number:</h1>
-     <vee-field placeholder="01XXXXXXXXX" name="number" type="text"  id="mainInput" @input="lengthHandler()"
+     <vee-field v-model="message" placeholder="01XXXXXXXXX" name="number" type="text"  id="mainInput" @input="lengthHandler()"
         class="border-2 transition duration-500 placeholder-indigo-400 focus:placeholder-transparent border-indigo-400 mb-1 w-full p-2 text-left text-indigo-400 bg-transparent rounded-md focus:outline-none "/><br/>
       <ErrorMessage class="text-red-600 w-full  text-center" name="number"/>
-      <div class="w-full grid grid-cols-4 gap-4 mt-2" v-if="input == true" id="otp">
+      <!-- <div class="w-full grid grid-cols-4 gap-4 mt-2" v-if="input == true" id="otp">
         <vee-field name="ist" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="ist" maxlength="1" v-on:keyup="clickevent()" />
         <vee-field name="snd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " disabled type="text" id="sec" maxlength="1" v-on:keyup="clickevent()" />
         <vee-field name="trd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " disabled type="text" id="third" maxlength="1" v-on:keyup="clickevent()" />
         <vee-field name="fth" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " disabled type="text" id="fourth" maxlength="1" v-on:keyup="test()"/>
-      </div>
+      </div> -->
 
       <button v-if="resend" @click="resend1()" class="text-green-400 text-right w-full">Resend code?</button>
       
       <vue-countdown v-if="timer"  :time=" 60 * 3 * 1000" v-slot="{ minutes, seconds }">
   Time Remaining：{{ minutes }} minutes, {{ seconds }} seconds.
 </vue-countdown>
-      <button id="submitButton" type="submit" @click="handleInput()" :disabled = "isDisabled == true" value="submit"
+      <button id="submitButton" type="submit" @click="handleInput()" :disabled = "isDisabled == true" 
               class="block w-full  text-white py-1.5 px-3 rounded transition mt-2
                " :class="btncolor">
               Submit
@@ -42,7 +42,7 @@ export default {
   data(){
     return{
             loginschema: {
-        number: 'required|numeric|min:11|max:11',
+        number: 'required|numeric|min:13|max:13',
         ist: 'required|numeric',
         snd: 'required|numeric',
         trd: 'required|numeric',
@@ -58,29 +58,35 @@ export default {
   },
 
 methods:{
-  login(values){
-    console.log(values)
+  loginForm(){
+    console.log(this.message)
   },
 // https://sellbee-api.herokuapp.com/v1/auth/verify-otp
   testMethod () {
-      axios.post('https://sellbee-api.herokuapp.com/v1/auth/login', {
-  })
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-  .then(function () {
-    // always executed
-  });  
-    },
+  axios.post('https://sellbee-api.herokuapp.com/v1/auth/login', {number: this.message})
+                 .then((res) => {
+                     //Perform Success Action
+                     console.log(res)
+                     console.log("1")
+                 })
+                 .catch((error) => {
+                     // error.response.status Check status code
+                     console.log(error)
+                     console.log("2")
+
+                 }).finally(() => {
+                     //Perform action in always
+                     console.log('finally')
+                     console.log("3")
+
+                 });
+        },
 
 
 handleInput() {
   var doc = document.getElementById('mainInput')
       const value = doc.value;
-      if (value && value.length == 11) {
+      if (value && value.length == 13) {
     
   this.timer = true
   this.input = true;
@@ -94,6 +100,9 @@ handleInput() {
       setTimeout(() => { this.timer = false;
        this.input = !this.input;
        this.resend = true},  60 * 3 * 1000);
+
+       this.testMethod()
+       this.loginForm()
     },
 
     resend1(){
@@ -110,7 +119,7 @@ handleInput() {
     lengthHandler(){
 var doc = document.getElementById('mainInput')
       const value = doc.value;
-      if (value && value.length == 11) {
+      if (value && value.length == 13) {
         
         this.isDisabled = false
 
