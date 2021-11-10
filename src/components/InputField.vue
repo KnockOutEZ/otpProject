@@ -1,24 +1,24 @@
 <template>
   <div class="parent">
     <div class="flex flex-col justify-center items-center h-screen bg-gray-100 ">
-      <vee-form :validation-schema="loginschema" class="md:w-4/12 sm:w-screen bg-gray-50 p-10 rounded-lg">
+      <vee-form :validation-schema="loginschema" class="md:w-4/12 sm:w-screen bg-gray-50 p-10 rounded-lg" @submit="login">
       <h1 class="font-bold text-xl mb-2">Please enter your number:</h1>
-     <vee-field placeholder="01XXXXXXXXX" name="number" type="text"  id="mainInput"  @submit="login" @input="lengthHandler()"
+     <vee-field placeholder="01XXXXXXXXX" name="number" type="text"  id="mainInput" @input="lengthHandler()"
         class="border-2 transition duration-500 placeholder-indigo-400 focus:placeholder-transparent border-indigo-400 mb-1 w-full p-2 text-left text-indigo-400 bg-transparent rounded-md focus:outline-none "/><br/>
       <ErrorMessage class="text-red-600 w-full  text-center" name="number"/>
       <div class="w-full grid grid-cols-4 gap-4 mt-2" v-if="input == true" id="otp">
-        <vee-field name="ist" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="ist" maxlength="1" v-on:keyup="clickevent(this,'sec')" />
-        <vee-field name="snd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="sec" maxlength="1" v-on:keyup="clickevent(this,'third')" />
-        <vee-field name="trd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="third" maxlength="1" v-on:keyup="clickevent(this,'fourth')" />
-        <vee-field name="fth" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="fourth" maxlength="1" v-on:keyup="test()"/>
+        <vee-field name="ist" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="ist" maxlength="1" v-on:keyup="clickevent()" />
+        <vee-field name="snd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " disabled type="text" id="sec" maxlength="1" v-on:keyup="clickevent()" />
+        <vee-field name="trd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " disabled type="text" id="third" maxlength="1" v-on:keyup="clickevent()" />
+        <vee-field name="fth" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " disabled type="text" id="fourth" maxlength="1" v-on:keyup="test()"/>
       </div>
 
       <button v-if="resend" @click="resend1()" class="text-green-400 text-right w-full">Resend code?</button>
       
-      <vue-countdown v-if="timer"  :time=" 60 * 5 * 1000" v-slot="{ minutes, seconds }">
+      <vue-countdown v-if="timer"  :time=" 60 * 3 * 1000" v-slot="{ minutes, seconds }">
   Time Remaining：{{ minutes }} minutes, {{ seconds }} seconds.
 </vue-countdown>
-      <button type="button" @click="handleInput()" :disabled = "isDisabled == true" 
+      <button id="submitButton" type="submit" @click="handleInput()" :disabled = "isDisabled == true" value="submit"
               class="block w-full  text-white py-1.5 px-3 rounded transition mt-2
                " :class="btncolor">
               Submit
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 import VueCountdown from '@chenfengyuan/vue-countdown';
 
 
@@ -53,30 +53,28 @@ export default {
       isDisabled: true,
       timer:false,
       resend:false,
+      message:""
     }
   },
 
 methods:{
-  login(){
-    console.log('qweqwe')
+  login(values){
+    console.log(values)
   },
-
-  // testMethod () {
-  //     axios.post('/randomEndpoint', {
-  //   params: {
-  //     ID: 12345
-  //   }
-  // })
-  // .then(function (response) {
-  //   console.log(response);
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // })
-  // .then(function () {
-  //   // always executed
-  // });  
-  //   },
+// https://sellbee-api.herokuapp.com/v1/auth/verify-otp
+  testMethod () {
+      axios.post('https://sellbee-api.herokuapp.com/v1/auth/login', {
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });  
+    },
 
 
 handleInput() {
@@ -95,7 +93,7 @@ handleInput() {
 
       setTimeout(() => { this.timer = false;
        this.input = !this.input;
-       this.resend = true},  60 * 5 * 1000);
+       this.resend = true},  60 * 3 * 1000);
     },
 
     resend1(){
@@ -105,7 +103,7 @@ handleInput() {
 
             setTimeout(() => { this.timer = false;
        this.input = !this.input;
-       this.resend = true;},  60 * 5 * 1000); 
+       this.resend = true;},  60 * 3 * 1000); 
     },
 
 
@@ -122,7 +120,13 @@ var doc = document.getElementById('mainInput')
     },
 
     test(){
-      this.isDisabled = false
+      
+                    if(document.getElementById('fourth').value.length != 0){
+                this.isDisabled = false;
+              }else{
+                this.isDisabled = true;
+
+              }
     },
 
 
@@ -134,6 +138,10 @@ var doc = document.getElementById('mainInput')
         inputs[i].value = '';
         if (i !== 0)
           inputs[i - 1].focus();
+          if(i <= 2){
+              inputs[i+1].setAttribute('disabled','disabled')
+              document.getElementById('submitButton').setAttribute('disabled','disabled')
+            }
       } else {
         if (i === inputs.length - 1 && inputs[i].value !== '') {
           return true;
@@ -141,6 +149,9 @@ var doc = document.getElementById('mainInput')
           inputs[i].value = event.key;
           if (i !== inputs.length - 1)
             inputs[i + 1].focus();
+            if(i <= 2){
+              inputs[i + 1].removeAttribute('disabled')
+            }
             // if(i==3){
             //           this.isDisabled = false
             //           console.log(i)        
@@ -176,6 +187,14 @@ input:invalid {
 
 button:disabled,
 button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+input:disabled,
+input[disabled]{
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
