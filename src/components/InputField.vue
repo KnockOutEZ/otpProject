@@ -35,8 +35,9 @@ import axios from 'axios'
 import VueCountdown from '@chenfengyuan/vue-countdown';
 
 
+
 export default {
-  name: 'HelloWorld',
+  name: 'InputField',
     components: {
       VueCountdown
   },
@@ -90,6 +91,8 @@ methods:{
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
+                     this.$store.commit('toggleAuthenticated')
+    this.$router.push({ name: 'Dashboard' });
                  })
                  .catch((error) => {
                      // error.response.status Check status code
@@ -99,7 +102,6 @@ methods:{
                      //Perform action in always
                      console.log('finally')
                      console.log("succsess")
-
                  });
         },
 
