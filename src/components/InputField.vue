@@ -19,7 +19,7 @@
       <vue-countdown v-if="timer"  :time=" 60 * 3 * 1000" v-slot="{ minutes, seconds }">
   Time Remaining：{{ minutes }} minutes, {{ seconds }} seconds.
 </vue-countdown>
-      <button id="submitButton" type="submit" @click="handleInput()" :disabled = "isDisabled == true" 
+      <button id="submitButton" type="button" @click="handleInput()" :disabled = "isDisabled == true" 
               class="block w-full  text-white py-1.5 px-3 rounded transition mt-2
                " :class="btncolor">
               Submit
