@@ -67,7 +67,7 @@ methods:{
   // },
 // https://sellbee-api.herokuapp.com/v1/auth/verify-otp
   numberMethod () {
-  axios.post('https://sellbee-api.herokuapp.com/v1/auth/login', {number: this.message})
+  axios.post(process.env.VUE_APP_API_URL + 'auth/login', {number: this.message})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
@@ -86,13 +86,15 @@ methods:{
         },
 
 // https://sellbee-api.herokuapp.com/v1/auth/verify-otp
+// {withCredentials:true}
           otpMethod () {
-  axios.post('https://sellbee-api.herokuapp.com/v1/auth/verify-otp', {number: this.message,otp:this.otp})
+  axios.post(process.env.VUE_APP_API_URL + 'auth/verify-otp', {number: this.message,otp:this.otp})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
                      this.$store.commit('toggleAuthenticated')
     this.$router.push({ name: 'Dashboard' });
+    console.log(res.data)
                  })
                  .catch((error) => {
                      // error.response.status Check status code
@@ -215,6 +217,9 @@ checkSubmitBtn(){
   // }
   // },
 
+},
+mounted(){
+  console.log(this.$store.state.isAuthenticated)
 }
 }
 </script>
