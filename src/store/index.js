@@ -7,8 +7,7 @@ export default createStore({
   mutations: {
     toggleAuthenticated(state){
       localStorage.Authenticator = !state.isAuthenticated
-      state.isAuthenticated = !state.isAuthenticated
-      
+      state.isAuthenticated = !state.isAuthenticated 
     },
   },
   actions: {

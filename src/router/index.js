@@ -4,7 +4,7 @@ import Dashboard from '../views/Dashboard.vue'
 import AllOrders from '../components/AllOrders.vue'
 import Summary from '../components/Summary.vue'
 import AddProduct from '../components/AddProduct.vue'
-import axios from 'axios'
+import ErrorPage from '../components/ErrorPage.vue'
 
 const routes = [
   {
@@ -16,16 +16,6 @@ const routes = [
       path:'',
       name:'Dashboard',
       component:Dashboard,
-      beforeEnter:(to,from,next)=>{
-        axios.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
-        .then((res) => {
-          console.log(res)
-          this.$routes.push('Home');
-      }).catch((error) => {
-        console.log(error)
-        next()
-    })
-      },
     redirect: { name: 'AllOrders' },
       children:[
         {
@@ -44,7 +34,16 @@ const routes = [
           component:AddProduct
         },
       ]
-  }
+  },
+  {
+    path:'/404',
+          name:'ErrorPage',
+          component:ErrorPage
+  },
+  {
+    path: '/:catchAll(.*)*',
+    redirect: { path: '/404' },
+  },
 ]
 
 const router = createRouter({

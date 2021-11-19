@@ -784,7 +784,7 @@
                       </a>
                     </li>
                     <li class="flex">
-                      <a
+                      <button @click="logOut"
                         class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                         href="#"
                       >
@@ -803,7 +803,7 @@
                           ></path>
                         </svg>
                         <span>Log out</span>
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </template>
@@ -821,6 +821,9 @@
 </template>
 
 <script>
+import axiosJWT from '../store/axios'
+import axios from 'axios'
+
 export default {
 name:'Dashboard',
 data(){
@@ -836,7 +839,28 @@ data(){
 },
 mounted(){
   console.log(this.$store.state.isAuthenticated)
-},
+
+//   axios.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
+//         .then((res) => {
+//           console.log(res)
+//         this.$routes.push({name:'Home'});
+
+//       }).catch((error) => {
+//         console.log(error)
+
+// })
+  },
+    beforeRouteEnter(to, from, next) {
+      axiosJWT.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
+        .then((res) => {
+          console.log(res)
+        next();
+      }).catch((error) => {
+        console.log(error)
+        next({ path: '/login' });
+
+})
+  },
 methods:{
   //   getThemeFromLocalStorage() {
   //   // if user already changed the theme, use it
@@ -888,6 +912,26 @@ methods:{
       this.isModalOpen = false
       this.trapCleanup()
     },
+
+    logOut(){
+      
+      axios.delete(process.env.VUE_APP_API_URL + 'auth/logout',{withCredentials:true})
+        .then((res) => {
+                     //Perform Success Action
+                     console.log(res)
+                     location.reload(); 
+                 })
+                 .catch((error) => {
+                     // error.response.status Check status code
+                     console.log(error)
+
+                 }).finally(() => {
+                     //Perform action in always
+                     console.log('finally')
+                     console.log("succsess")
+                 });
+      
+    }
 }
 }
 </script>
