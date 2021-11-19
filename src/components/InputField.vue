@@ -88,7 +88,7 @@ methods:{
 // https://sellbee-api.herokuapp.com/v1/auth/verify-otp
 // {withCredentials:true}
           otpMethod () {
-  axios.post(process.env.VUE_APP_API_URL + 'auth/verify-otp', {number: this.message,otp:this.otp})
+  axios.post(process.env.VUE_APP_API_URL + 'auth/verify-otp', {number: this.message,otp:this.otp},{withCredentials:true})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)

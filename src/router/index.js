@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import AllOrders from '../components/AllOrders.vue'
 import Summary from '../components/Summary.vue'
+import AddProduct from '../components/AddProduct.vue'
 import axios from 'axios'
 
 const routes = [
@@ -22,7 +23,6 @@ const routes = [
           this.$routes.push('Home');
       }).catch((error) => {
         console.log(error)
-        this.$routes.push('AllOrders');
         next()
     })
       },
@@ -37,6 +37,11 @@ const routes = [
           path:'summary',
           name:'Summary',
           component:Summary
+        },
+        {
+          path:'addproduct',
+          name:'AddProduct',
+          component:AddProduct
         },
       ]
   }
