@@ -1,5 +1,9 @@
 <template>
+  <router-link to="/addproduct" class="mt-auto text-indigo-400 ml-auto">
+    Create <i class="fa fa-plus" aria-hidden="true"></i>
+  </router-link>
   <table-lite
+  @click="qwe"
     :is-static-mode="true"
     :columns="table.columns"
     :rows="table.rows"
@@ -14,6 +18,11 @@ import TableLite from "vue3-table-lite";
 export default defineComponent({
   name: "App",
   components: { TableLite },
+  methods:{
+    qwe(){
+      this.$router.push("/editproduct")
+    }
+  },
   setup() {
     // Fake data
     const data = reactive([]);

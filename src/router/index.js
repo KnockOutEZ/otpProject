@@ -4,6 +4,7 @@ import Dashboard from '../views/Dashboard.vue'
 import AllOrders from '../components/AllOrders.vue'
 import Summary from '../components/Summary.vue'
 import AddProduct from '../components/AddProduct.vue'
+import EditProduct from '../components/EditProduct.vue'
 import ErrorPage from '../components/ErrorPage.vue'
 
 const routes = [
@@ -32,6 +33,11 @@ const routes = [
           path:'addproduct',
           name:'AddProduct',
           component:AddProduct
+        },
+        {
+          path:'editproduct',
+          name:'EditProduct',
+          component:EditProduct
         },
       ]
   },
