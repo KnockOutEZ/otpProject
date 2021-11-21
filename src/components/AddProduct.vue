@@ -32,11 +32,7 @@
               >
                 Description
               </label>
-
-              <textarea
-                id="about"
-                name="about"
-                rows="3"
+              <ckeditor
                 class="
                   shadow-sm
                   focus:ring-indigo-500 focus:border-indigo-500
@@ -50,8 +46,10 @@
                   border-gray-300
                   rounded-md
                 "
-                placeholder="you@example.com"
-              ></textarea>
+                :editor="editor"
+                v-model="editorData"
+                :config="editorConfig"
+              ></ckeditor>
             </div>
           </div>
         </div>
@@ -213,16 +211,55 @@
           <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="px-4 py-5 bg-white sm:p-6">
               <div class="flex justify-between">
-                              <label
-                for="company_website"
-                class="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Product Status
-              </label>
-              <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-    <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-    <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-</div>
+                <label
+                  for="company_website"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Product Status
+                </label>
+                <div
+                  class="
+                    relative
+                    inline-block
+                    w-10
+                    mr-2
+                    align-middle
+                    select-none
+                    transition
+                    duration-200
+                    ease-in
+                  "
+                >
+                  <input
+                    type="checkbox"
+                    name="toggle"
+                    id="toggle"
+                    class="
+                      toggle-checkbox
+                      absolute
+                      block
+                      w-6
+                      h-6
+                      rounded-full
+                      bg-white
+                      border-4
+                      appearance-none
+                      cursor-pointer
+                    "
+                  />
+                  <label
+                    for="toggle"
+                    class="
+                      toggle-label
+                      block
+                      overflow-hidden
+                      h-6
+                      rounded-full
+                      bg-gray-300
+                      cursor-pointer
+                    "
+                  ></label>
+                </div>
               </div>
 
               <label
@@ -294,17 +331,29 @@
 </template>
 
 <script>
-export default {};
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
+export default {
+  data() {
+    return {
+      editor: ClassicEditor,
+      editorData: "",
+      editorConfig: {
+        // The configuration of the editor.
+      },
+    };
+  },
+};
 </script>
 
 <style scoped>
 .toggle-checkbox:checked {
   @apply: right-0 border-green-400;
   right: 0;
-  border-color: #68D391;
+  border-color: #68d391;
 }
 .toggle-checkbox:checked + .toggle-label {
   @apply: bg-green-400;
-  background-color: #68D391;
+  background-color: #68d391;
 }
 </style>

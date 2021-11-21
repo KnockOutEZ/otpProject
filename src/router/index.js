@@ -6,6 +6,7 @@ import Summary from '../components/Summary.vue'
 import AddProduct from '../components/AddProduct.vue'
 import EditProduct from '../components/EditProduct.vue'
 import ErrorPage from '../components/ErrorPage.vue'
+import Analytics from '../components/Analytics/Analytics.vue'
 
 const routes = [
   {
@@ -38,6 +39,11 @@ const routes = [
           path:'editproduct',
           name:'EditProduct',
           component:EditProduct
+        },
+        {
+          path:'analytics',
+          name:'Analytics',
+          component:Analytics
         },
       ]
   },
