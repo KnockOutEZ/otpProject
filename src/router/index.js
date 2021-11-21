@@ -7,6 +7,7 @@ import AddProduct from '../components/AddProduct.vue'
 import EditProduct from '../components/EditProduct.vue'
 import ErrorPage from '../components/ErrorPage.vue'
 import Analytics from '../components/Analytics/Analytics.vue'
+import Notifications from '../components/Others/Notifications.vue'
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
           path:'analytics',
           name:'Analytics',
           component:Analytics
+        },
+        {
+          path:'notifications',
+          name:'Notifications',
+          component:Notifications
         },
       ]
   },

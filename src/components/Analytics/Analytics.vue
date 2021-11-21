@@ -648,12 +648,12 @@ chart.cursor.lineX.fill = am4core.color("#000000");
   height: 18rem;
 }
 
-#chartdiv1,#chartdiv3,#chartdiv {
+#chartdiv3,#chartdiv {
   width: 100%;
   height: 100%;
 }
 
-#chartdiv2{
+#chartdiv1,#chartdiv2{
   height: 18rem;
 }
 </style>
