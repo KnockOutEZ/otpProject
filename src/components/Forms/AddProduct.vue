@@ -225,11 +225,11 @@
                   >
                     Coupon Amount
                   </label>
-                  <div class="relative flex w-full flex-wrap items-stretch mb-3">
+                  <div class="relative flex w-full flex-wrap items-stretch">
   <span class="z-10 h-full leading-snug font-normal absolute text-center text-gray-500 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-2">
     <i class="fas fa-percent"></i>
   </span>
-  <vee-field name="couponName" type="text" placeholder="50" class="pl-8 focus:ring-indigo-500 focus:border-indigo-500
+  <vee-field name="couponAmount" type="text" placeholder="50" class="pl-8 focus:ring-indigo-500 focus:border-indigo-500
                       px-3
                       py-2
                       mb-2
@@ -241,7 +241,7 @@
                       rounded
                       border-gray-300"/>
 </div>
-      <ErrorMessage class="text-red-600 w-full  text-center" name="couponName"/>
+      <ErrorMessage class="text-red-600 w-full  text-center" name="couponAmount"/>
                 </div>
 
                 <div>
@@ -271,31 +271,53 @@
       <ErrorMessage class="text-red-600 w-full  text-center" name="couponExpiryDate"/>
                 </div>
 
+                <div class="col-span-2">
+                  <label
+                    for="company_website"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Products
+                  </label>
+                  <Multiselect
+                  name="products"
+                   mode="tags"
+                  :closeOnSelect="false"
+                  :searchable="true"
+                  :createTag="false"
+      v-model="value"
+      :options="options"
+    />
+      <ErrorMessage class="text-red-600 w-full  text-center" name="products"/>
+                </div>
+
                 <div>
                   <label
                     for="company_website"
                     class="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Quantity
+                    Usage Limit Per Coupon
                   </label>
-                  <vee-field
-                  name="quantity"
-                    type="number"
-                    class="
-                      focus:ring-indigo-500 focus:border-indigo-500
-                      px-3
-                      py-2
-                      mb-2
-                      flex-1
-                      block
-                      w-full
-                      sm:text-sm
-                      border-2
-                      rounded
-                      border-gray-300
-                    "
-                  />
-      <ErrorMessage class="text-red-600 w-full  text-center" name="quantity"/>
+                                    <Multiselect
+                                    name="usagelimitpercoupon"
+      v-model="value"
+      :options="options"
+    />
+      <ErrorMessage class="text-red-600 w-full  text-center" name="usagelimitpercoupon"/>
+                </div>
+
+                <div>
+                  <label
+                    for="company_website"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Usage Limit Per User
+                  </label>
+                  <Multiselect
+                  name="usagelimitperuser"
+      v-model="value"
+      :options="options"
+    />
+      <ErrorMessage class="text-red-600 w-full  text-center" name="usagelimitperuser"/>
                 </div>
               </div>
             </div>
@@ -434,11 +456,20 @@
 
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+  import Multiselect from '@vueform/multiselect'
 
 export default {
+  components: {
+      Multiselect,
+    },
   data() {
     return {
                   addproductschema: {
+                    usagelimitpercoupon:'required|numeric',
+                    usagelimitperuser:'required|numeric',
+                    couponExpiryDate:'required|numeric',
+                    products:'required',
+                    couponAmount:'required|numeric',
         title: 'required|alpha_spaces',
         // fileUpload:'required',
         price:'required|numeric',
@@ -451,6 +482,12 @@ export default {
       editorConfig: {
         // The configuration of the editor.
       },
+      value: null,
+        options: [
+          'Batman',
+          'Robin',
+          'Joker',
+        ]
     };
   },
   methods:{
@@ -462,6 +499,9 @@ export default {
 </script>
 
 <style scoped>
+.multiselect-dropdown{
+max-height: 10px !important;
+}
 .toggle-checkbox:checked {
   @apply: right-0 border-green-400;
   right: 0;
@@ -472,3 +512,5 @@ export default {
   background-color: #68d391;
 }
 </style>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
