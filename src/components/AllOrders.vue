@@ -111,13 +111,14 @@
             </div>
 <div class="flex w-full justify-between">
     <div style="text-align: left" class="mb-2 mt-5">
-    <label>SearchBy:</label><input class="ml-2 pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input" v-model="searchTerm" />
+    <label>SearchBy:</label><input class="ml-2 pl-5 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white border-purple-100 focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input" v-model="searchTerm" />
   </div>
   <router-link to="/addproduct" class="mt-auto text-indigo-400">
     Create <i class="fa fa-plus" aria-hidden="true"></i>
   </router-link>
 </div>
   <table-lite
+  style="overflow-x:auto !important"
   :do-search="true"
     :is-static-mode="true"
     :columns="table.columns"

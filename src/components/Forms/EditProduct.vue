@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="md:grid md:grid-cols-3 md:gap-6">
+    <vee-form :validation-schema="editproductschema" class=" md:grid md:grid-cols-3 md:gap-6" @submit="test1">
       <div class="md:col-span-2">
         <div class="px-4 sm:px-0">
           <div class="shadow sm:rounded-md sm:overflow-hidden">
@@ -11,10 +11,13 @@
               >
                 Title
               </label>
-              <input
+              <vee-field
+              name="title"
                 type="text"
                 class="
                   focus:ring-indigo-500 focus:border-indigo-500
+                  px-3
+                  py-2
                   mb-2
                   flex-1
                   block
@@ -25,6 +28,8 @@
                   border-gray-300
                 "
               />
+      <ErrorMessage class="text-red-600 w-full  text-center" name="title"/>
+
 
               <label
                 for="company_website"
@@ -32,24 +37,14 @@
               >
                 Description
               </label>
-              <ckeditor
-                class="
-                  shadow-sm
-                  focus:ring-indigo-500 focus:border-indigo-500
-                  mb-2
-                  mt-1
-                  block
-                  w-full
-                  sm:text-sm
-                  border-2
-                  p-2
-                  border-gray-300
-                  rounded-md
-                "
+              
+              <div id="theCK" class=" md:w-full w-11/12 flex-1">
+                <ckeditor
                 :editor="editor"
                 v-model="editorData"
                 :config="editorConfig"
               ></ckeditor>
+              </div>
             </div>
           </div>
         </div>
@@ -94,7 +89,7 @@
                     </svg>
                     <div class="flex text-sm text-gray-600">
                       <label
-                        for="file-upload"
+                        for="fileUpload"
                         class="
                           relative
                           cursor-pointer
@@ -110,9 +105,9 @@
                         "
                       >
                         <span>Upload a file</span>
-                        <input
-                          id="file-upload"
-                          name="file-upload"
+                        <vee-field
+                          id="fileUpload"
+                          name="fileUpload"
                           type="file"
                           class="sr-only"
                         />
@@ -123,6 +118,7 @@
                       PNG, JPG, GIF up to 10MB
                     </p>
                   </div>
+      <ErrorMessage class="text-red-600 w-full  text-center" name="fileUpload"/>
                 </div>
               </div>
             </div>
@@ -132,7 +128,7 @@
         <div class="px-4 sm:px-0 mt-5">
           <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="px-4 py-5 bg-white sm:p-6">
-              <div class="grid grid-cols-2 gap-4">
+              <div class="md:grid grid-cols-2 gap-4">
                 <div>
                   <label
                     for="company_website"
@@ -140,10 +136,13 @@
                   >
                     Price
                   </label>
-                  <input
+                  <vee-field
+                  name="price"
                     type="text"
                     class="
                       focus:ring-indigo-500 focus:border-indigo-500
+                      px-3
+                      py-2
                       mb-2
                       flex-1
                       block
@@ -154,6 +153,7 @@
                       border-gray-300
                     "
                   />
+      <ErrorMessage class="text-red-600 w-full  text-center" name="price"/>
                 </div>
 
                 <div>
@@ -163,10 +163,13 @@
                   >
                     Sale Price
                   </label>
-                  <input
+                  <vee-field
+                  name="salePrice"
                     type="text"
                     class="
                       focus:ring-indigo-500 focus:border-indigo-500
+                      px-3
+                      py-2
                       mb-2
                       flex-1
                       block
@@ -177,6 +180,7 @@
                       border-gray-300
                     "
                   />
+      <ErrorMessage class="text-red-600 w-full  text-center" name="salePrice"/>
                 </div>
 
                 <div>
@@ -186,10 +190,13 @@
                   >
                     Quantity
                   </label>
-                  <input
+                  <vee-field
+                  name="quantity"
                     type="number"
                     class="
                       focus:ring-indigo-500 focus:border-indigo-500
+                      px-3
+                      py-2
                       mb-2
                       flex-1
                       block
@@ -200,6 +207,7 @@
                       border-gray-300
                     "
                   />
+      <ErrorMessage class="text-red-600 w-full  text-center" name="quantity"/>
                 </div>
               </div>
             </div>
@@ -207,7 +215,7 @@
         </div>
       </div>
       <div class="mt-5 md:mt-0 md:col-span-1">
-        <form action="#" method="POST">
+          <div class="px-4 sm:px-0 mt-5">
           <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="px-4 py-5 bg-white sm:p-6">
               <div class="flex justify-between">
@@ -230,7 +238,7 @@
                     ease-in
                   "
                 >
-                  <input
+                  <vee-field
                     type="checkbox"
                     name="toggle"
                     id="toggle"
@@ -271,7 +279,7 @@
               <div class="">
                 <div class="">
                   <div class="relative">
-                    <div class="absolute top-0 left-2">
+                    <div class="absolute top-2 left-2">
                       <i
                         class="
                           fa fa-search
@@ -281,10 +289,14 @@
                         "
                       ></i>
                     </div>
-                    <input
+                    <vee-field
+                    name="collections"
                       type="text"
                       class="
                         focus:ring-indigo-500 focus:border-indigo-500
+                        px-3
+                        pl-6
+                        py-2
                         flex-1
                         block
                         w-full
@@ -294,11 +306,13 @@
                         border-gray-300
                       "
                     />
+      <ErrorMessage class="text-red-600 w-full  text-center" name="collections"/>
+
                   </div>
                 </div>
               </div>
             </div>
-            <div class="w-full pb-3 bg-gray-50 text-right sm:px-6">
+            <div class="w-full pb-3 bg-gray-50 text-right sm:px-6 px-6">
               <button
                 type="submit"
                 class="
@@ -324,9 +338,9 @@
               </button>
             </div>
           </div>
-        </form>
+          </div>
       </div>
-    </div>
+    </vee-form>
   </div>
 </template>
 
@@ -336,6 +350,14 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
     return {
+                  editproductschema: {
+        title: 'required|alpha_spaces',
+        // fileUpload:'required',
+        price:'required|numeric',
+        salePrice:'required|numeric',
+        quantity:'required|numeric',
+        collections:'required',
+      },
       editor: ClassicEditor,
       editorData: "",
       editorConfig: {
@@ -343,6 +365,11 @@ export default {
       },
     };
   },
+  methods:{
+    test1(values){
+      console.log(values)
+    }
+  }
 };
 </script>
 

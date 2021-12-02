@@ -19,7 +19,7 @@
               
               <router-link
                 class="inline-flex items-center w-full text-sm font-semibold hover:text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                to="/allorders" active-link="active"
+                to="/" active-link="active"
               >
               <span
                 class="daActive absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
@@ -43,11 +43,40 @@
               </router-link>
             </li>
           </ul>
+          <ul class="">
+            <li class="relative px-6 py-3">
+              
+              <router-link
+                class="inline-flex items-center w-full text-sm font-semibold hover:text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                to="/allorders" active-link="active"
+              >
+              <span
+                class="daActive absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
+                <svg
+                  class="w-5 h-5"
+                  aria-hidden="true"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                  ></path>
+                </svg>
+                <span class="ml-4">Orders</span>
+              </router-link>
+            </li>
+          </ul>
           <ul>
             <li class="relative px-6 py-3">
               <router-link
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                to="summary" active-link="active"
+                to="/summary" active-link="active"
               >
                             <span
                 class="daActive absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
@@ -67,30 +96,8 @@
                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
                   ></path>
                 </svg>
-                <span class="ml-4">Forms</span>
+                <span class="ml-4">Products</span>
               </router-link>
-            </li>
-            <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="cards.html"
-              >
-                <svg
-                  class="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                  ></path>
-                </svg>
-                <span class="ml-4">Cards</span>
-              </a>
             </li>
             <li class="relative px-6 py-3">
               <router-link
@@ -120,7 +127,7 @@
                 <span class="ml-4">Analytics</span>
               </router-link>
             </li>
-            <li class="relative px-6 py-3">
+            <!-- <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="buttons.html"
@@ -262,15 +269,15 @@
                   </li>
                 </ul>
               </template>
-            </li>
+            </li> -->
           </ul>
           <div class="px-6 my-6">
-            <button
+            <router-link to="/addproduct"
               class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
             >
-              Create account
+              Create Product
               <span class="ml-2" aria-hidden="true">+</span>
-            </button>
+            </router-link>
           </div>
         </div>
       </aside>
@@ -308,14 +315,14 @@
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <router-link
                 class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                to="/allorders"
+                to="/"
               >
+              <span
+                class="daActive absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
                 <svg
                   class="w-5 h-5"
                   aria-hidden="true"
@@ -338,30 +345,12 @@
             <li class="relative px-6 py-3">
               <router-link
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                to="summary"
+                to="/allorders"
               >
-                <svg
-                  class="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                  ></path>
-                </svg>
-                <span class="ml-4">Forms</span>
-              </router-link>
-            </li>
-            <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="cards.html"
-              >
+              <span
+                class="daActive absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
                 <svg
                   class="w-5 h-5"
                   aria-hidden="true"
@@ -376,14 +365,44 @@
                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                   ></path>
                 </svg>
-                <span class="ml-4">Cards</span>
-              </a>
+                <span class="ml-4">Orders</span>
+              </router-link>
             </li>
             <li class="relative px-6 py-3">
-              <a
+              <router-link
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="charts.html"
+                to="/summary"
               >
+              <span
+                class="daActive absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
+                <svg
+                  class="w-5 h-5"
+                  aria-hidden="true"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                  ></path>
+                </svg>
+                <span class="ml-4">Products</span>
+              </router-link>
+            </li>
+            <li class="relative px-6 py-3">
+              <router-link
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                to="/analytics"
+              >
+              <span
+                class="daActive absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
                 <svg
                   class="w-5 h-5"
                   aria-hidden="true"
@@ -399,10 +418,10 @@
                   ></path>
                   <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                 </svg>
-                <span class="ml-4">Charts</span>
-              </a>
+                <span class="ml-4">Analytics</span>
+              </router-link>
             </li>
-            <li class="relative px-6 py-3">
+            <!-- <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="buttons.html"
@@ -544,15 +563,15 @@
                   </li>
                 </ul>
               </template>
-            </li>
+            </li> -->
           </ul>
           <div class="px-6 my-6">
-            <button
+            <router-link to="/addproduct"
               class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
             >
-              Create account
+              Create Product
               <span class="ml-2" aria-hidden="true">+</span>
-            </button>
+            </router-link>
           </div>
         </div>
       </aside>
@@ -677,9 +696,35 @@
                     x-transition:leave="transition ease-in duration-150"
                     x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0"
-                    class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700"
+                    class="absolute right-0 w-72 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700"
                   >
-                    <li class="flex">
+
+                  <li class="flex">
+                      <router-link
+                        class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                        to="/notifications"
+                      >
+                        <div class="flex space-x-2">
+                          <img class="w-10 h-10 rounded-full my-auto" src="../../public/assets/img/login-office.jpeg" alt="">
+                          <div>
+                            <span class="text-gray-700 font-bold">Giga Nigga</span>
+                            <p class="text-gray-500">Ayo nigga wassup.</p>
+                            <p class="text-indigo-500 mt-1 text-xs">a few moments ago</p>
+                          </div>
+                        </div>
+                        <span
+                          class="inline-flex h-2 w-2 rounded-full bg-green-700"
+                        >
+                          
+                        </span>
+                      </router-link>
+                    </li>
+                  <li class="w-full border-t-2 border-gray-200 text-center">
+                    <router-link to="/notifications" class="text-sm w-full">See More</router-link>
+                  </li>
+
+
+                    <!-- <li class="flex">
                       <router-link
                         class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                         to="/notifications"
@@ -691,8 +736,8 @@
                           13
                         </span>
                       </router-link>
-                    </li>
-                    <li class="flex">
+                    </li> -->
+                    <!-- <li class="flex">
                       <a
                         class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                         href="#"
@@ -712,7 +757,7 @@
                       >
                         <span>Alerts</span>
                       </a>
-                    </li>
+                    </li> -->
                   </ul>
                 </template>
               </li>
@@ -744,9 +789,9 @@
                     aria-label="submenu"
                   >
                     <li class="flex">
-                      <a
+                      <router-link
                         class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
+                        to="/profile"
                       >
                         <svg
                           class="w-4 h-4 mr-3"
@@ -763,7 +808,7 @@
                           ></path>
                         </svg>
                         <span>Profile</span>
-                      </a>
+                      </router-link>
                     </li>
                     <li class="flex">
                       <a

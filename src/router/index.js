@@ -3,9 +3,10 @@ import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import AllOrders from '../components/AllOrders.vue'
 import Summary from '../components/Summary.vue'
-import AddProduct from '../components/AddProduct.vue'
-import EditProduct from '../components/EditProduct.vue'
-import ErrorPage from '../components/ErrorPage.vue'
+import AddProduct from '../components/Forms/AddProduct.vue'
+import EditProduct from '../components/Forms/EditProduct.vue'
+import ProfileForm from '../components/Forms/ProfileForm.vue'
+import ErrorPage from '../components/Others/ErrorPage.vue'
 import Analytics from '../components/Analytics/Analytics.vue'
 import Notifications from '../components/Others/Notifications.vue'
 
@@ -51,6 +52,11 @@ const routes = [
           name:'Notifications',
           component:Notifications
         },
+        {
+          path:'profile',
+          name:'ProfileForm',
+          component:ProfileForm
+        }
       ]
   },
   {

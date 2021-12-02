@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <InputField/>
+    <LoginPage/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import InputField from '@/components/InputField.vue'
+import LoginPage from '../components/Auth/LoginPage.vue'
 
 export default {
   name: 'Home',
   components: {
-    InputField
+    LoginPage
   },
 }
 </script>

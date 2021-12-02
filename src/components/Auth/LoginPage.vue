@@ -37,7 +37,7 @@ import VueCountdown from '@chenfengyuan/vue-countdown';
 
 
 export default {
-  name: 'InputField',
+  name: 'LoginPage',
     components: {
       VueCountdown
   },

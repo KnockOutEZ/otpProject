@@ -3,7 +3,8 @@
     Create <i class="fa fa-plus" aria-hidden="true"></i>
   </router-link>
   <table-lite
-  @click="qwe"
+  style="overflow-x:auto !important"
+  @click="formOpen"
     :is-static-mode="true"
     :columns="table.columns"
     :rows="table.rows"
@@ -19,7 +20,7 @@ export default defineComponent({
   name: "App",
   components: { TableLite },
   methods:{
-    qwe(){
+    formOpen(){
       this.$router.push("/editproduct")
     }
   },
@@ -31,6 +32,7 @@ export default defineComponent({
         id: i,
         name: "TEST" + i,
         email: "test" + i + "@example.com",
+        images:"weqwe"
       });
     }
     // Table config
@@ -50,8 +52,8 @@ export default defineComponent({
           sortable: true,
         },
         {
-          label: "Email",
-          field: "email",
+          label: "Images",
+          field: "images",
           width: "15%",
           sortable: true,
         },

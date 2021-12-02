@@ -2,7 +2,7 @@ import {
     Form as VeeForm, Field as VeeField, defineRule, ErrorMessage, configure,
   } from 'vee-validate';
   import {
-    required, min, max,numeric
+    required, min, max,numeric,alpha_spaces as alphaSpaces
   } from '@vee-validate/rules';
   
   export default {
@@ -13,6 +13,7 @@ import {
   
       defineRule('required', required);
       defineRule('numeric', numeric);
+      defineRule('alpha_spaces', alphaSpaces);
       defineRule('min', min);
       defineRule('max', max);
   
@@ -25,6 +26,9 @@ import {
             min_value: `The field  ${ctx.field} is too low`,
             max_value: `The field ${ctx.field} is too high`,
             numeric: 'The field must be numeric',
+            alphaSpaces: `The field ${ctx.field} may only contain alphabetical characters and spaces`,
+            excluded: `You are not allowed to use this value for the field ${ctx.field}`,
+            tos: 'You must accept the terms and services',
           };
   
           const message = messages[ctx.rule.name]
