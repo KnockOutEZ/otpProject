@@ -6,6 +6,7 @@ import Summary from '../components/Summary.vue'
 import AddProduct from '../components/Forms/AddProduct.vue'
 import EditProduct from '../components/Forms/EditProduct.vue'
 import ProfileForm from '../components/Forms/ProfileForm.vue'
+import CouponForm from '../components/Forms/CouponForm.vue'
 import ErrorPage from '../components/Others/ErrorPage.vue'
 import Analytics from '../components/Analytics/Analytics.vue'
 import Notifications from '../components/Others/Notifications.vue'
@@ -56,6 +57,11 @@ const routes = [
           path:'profile',
           name:'ProfileForm',
           component:ProfileForm
+        },
+        {
+          path:'coupon',
+          name:'CouponForm',
+          component:CouponForm
         }
       ]
   },
