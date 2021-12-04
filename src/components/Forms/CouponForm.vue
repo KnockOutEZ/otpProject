@@ -85,11 +85,23 @@
                   >
                     Usage Limit Per Coupon
                   </label>
-                                    <Multiselect
-                                    name="usagelimitpercoupon"
-      v-model="value"
-      :options="options"
-    />
+<vee-field
+                  name="usagelimitpercoupon"
+                    type="number"
+                    class="
+                      focus:ring-indigo-500 focus:border-indigo-500
+                      px-3
+                      py-2
+                      mb-2
+                      flex-1
+                      block
+                      w-full
+                      sm:text-sm
+                      border-2
+                      rounded
+                      border-gray-300
+                    "
+                  />
       <ErrorMessage class="text-red-600 w-full  text-center" name="usagelimitpercoupon"/>
                 </div>
 
@@ -100,11 +112,23 @@
                   >
                     Usage Limit Per User
                   </label>
-                  <Multiselect
+<vee-field
                   name="usagelimitperuser"
-      v-model="value"
-      :options="options"
-    />
+                    type="number"
+                    class="
+                      focus:ring-indigo-500 focus:border-indigo-500
+                      px-3
+                      py-2
+                      mb-2
+                      flex-1
+                      block
+                      w-full
+                      sm:text-sm
+                      border-2
+                      rounded
+                      border-gray-300
+                    "
+                  />
       <ErrorMessage class="text-red-600 w-full  text-center" name="usagelimitperuser"/>
                 </div>
               </div>
@@ -126,7 +150,7 @@ export default {
             couponFormSchema:{
                 usagelimitpercoupon:'required|numeric',
                     usagelimitperuser:'required|numeric',
-                    couponExpiryDate:'required|numeric',
+                    couponExpiryDate:'required',
                     products:'required|numeric',
                     couponAmount:'required|numeric',
             },

@@ -1,11 +1,11 @@
 <template>
-  <form class="shadow sm:rounded-md sm:overflow-hidden px-4 py-5 bg-white sm:p-6">
+  <vee-form :validation-schema="editprofileschema" @submit="submitProfileForm" class="shadow sm:rounded-md sm:overflow-hidden px-4 py-5 bg-white sm:p-6">
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-first-name">
         First Name
       </label>
-      <input class="focus:ring-indigo-500 focus:border-indigo-500
+      <vee-field name="firstName" class="focus:ring-indigo-500 focus:border-indigo-500
                       px-3
                       py-2
                       mb-2
@@ -15,13 +15,15 @@
                       sm:text-sm
                       border-2
                       rounded
-                      border-gray-300" id="grid-first-name" type="text" placeholder="Jane">
+                      border-gray-300" id="grid-first-name" type="text" placeholder="Jane"/>
+
+                      <ErrorMessage class="text-red-600 w-full  text-center" name="firstName"/>
     </div>
     <div class="w-full md:w-1/2 px-3">
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-last-name">
         Last Name
       </label>
-      <input class="focus:ring-indigo-500 focus:border-indigo-500
+      <vee-field name="lastName" class="focus:ring-indigo-500 focus:border-indigo-500
                       px-3
                       py-2
                       mb-2
@@ -31,7 +33,8 @@
                       sm:text-sm
                       border-2
                       rounded
-                      border-gray-300" id="grid-last-name" type="text" placeholder="Doe">
+                      border-gray-300" id="grid-last-name" type="text" placeholder="Doe"/>
+                      <ErrorMessage class="text-red-600 w-full  text-center" name="lastName"/>
     </div>
   </div>
   <div class="flex flex-wrap -mx-3 mb-6">
@@ -39,7 +42,7 @@
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-password">
         Address
       </label>
-      <input class="focus:ring-indigo-500 focus:border-indigo-500
+      <vee-field name="address" class="focus:ring-indigo-500 focus:border-indigo-500
                       px-3
                       py-2
                       mb-2
@@ -49,7 +52,8 @@
                       sm:text-sm
                       border-2
                       rounded
-                      border-gray-300" id="grid-password" type="text">
+                      border-gray-300" id="grid-password" type="text"/>
+                      <ErrorMessage class="text-red-600 w-full  text-center" name="address"/>
     </div>
   </div>
   <div class="flex flex-wrap -mx-3 mb-6">
@@ -57,7 +61,7 @@
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-password">
         Apartment,suite,etc
       </label>
-      <input class="focus:ring-indigo-500 focus:border-indigo-500
+      <vee-field name="apartment" class="focus:ring-indigo-500 focus:border-indigo-500
                       px-3
                       py-2
                       mb-2
@@ -67,7 +71,8 @@
                       sm:text-sm
                       border-2
                       rounded
-                      border-gray-300" id="grid-password" type="text">
+                      border-gray-300" id="grid-password" type="text"/>
+                      <ErrorMessage class="text-red-600 w-full  text-center" name="apartment"/>
     </div>
   </div>
   <div class="flex flex-wrap -mx-3 mb-6">
@@ -75,7 +80,7 @@
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-password">
         City
       </label>
-      <input class="focus:ring-indigo-500 focus:border-indigo-500
+      <vee-field name="city" class="focus:ring-indigo-500 focus:border-indigo-500
                       px-3
                       py-2
                       mb-2
@@ -85,7 +90,8 @@
                       sm:text-sm
                       border-2
                       rounded
-                      border-gray-300" id="grid-password" type="text" placeholder="Albuquerque">
+                      border-gray-300" id="grid-password" type="text" placeholder="Albuquerque"/>
+                      <ErrorMessage class="text-red-600 w-full  text-center" name="city"/>
     </div>
   </div>
   <div class="flex flex-wrap -mx-3 mb-6">
@@ -93,7 +99,7 @@
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-city">
         Country/region
       </label>
-      <select class="focus:ring-indigo-500 focus:border-indigo-500
+      <vee-field as="select" name="country" class="focus:ring-indigo-500 focus:border-indigo-500 text-black
                       px-3
                       py-2
                       mb-2
@@ -107,14 +113,15 @@
                       <option>Bangladesh</option>
   <option>No</option>
   <option>Maybe</option>
-      </select>
+      </vee-field>
+                      <ErrorMessage class="text-red-600 w-full  text-center" name="country"/>
     </div>
     <div class="w-full md:w-2/4 px-3 mb-6 md:mb-0">
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-state">
         Postal Code
       </label>
       <div class="relative">
-              <input class="focus:ring-indigo-500 focus:border-indigo-500
+              <vee-field name="postalCode" class="focus:ring-indigo-500 focus:border-indigo-500
                       px-3
                       py-2
                       mb-2
@@ -124,7 +131,8 @@
                       sm:text-sm
                       border-2
                       rounded
-                      border-gray-300" id="grid-password" type="text" placeholder="1206">
+                      border-gray-300" id="grid-password" type="text" placeholder="1206"/>
+                      <ErrorMessage class="text-red-600 w-full  text-center" name="postalCode"/>
       </div>
     </div>
   </div>
@@ -134,9 +142,9 @@
         Phone
       </label>
       <div class="relative">
-              <input class="focus:ring-indigo-500 focus:border-indigo-500
+               <vue-tel-input name="phone" class="focus:ring-indigo-500 focus:border-indigo-500
                       px-3
-                      py-2
+                      py-1
                       mb-2
                       flex-1
                       block
@@ -144,7 +152,8 @@
                       sm:text-sm
                       border-2
                       rounded
-                      border-gray-300" id="grid-password" type="text">
+                      border-gray-300" mode="international" v-model="phone" required></vue-tel-input>
+                      <ErrorMessage class="text-red-600 w-full  text-center" name="phone"/>
       </div>
     </div>
     <div class="w-full md:w-2/4 px-3 mb-6 md:mb-0">
@@ -152,7 +161,7 @@
         Business or personal website (optional)
       </label>
       <div class="relative">
-              <input class="focus:ring-indigo-500 focus:border-indigo-500
+              <vee-field name="website" class="focus:ring-indigo-500 focus:border-indigo-500
                       px-3
                       py-2
                       mb-2
@@ -162,17 +171,18 @@
                       sm:text-sm
                       border-2
                       rounded
-                      border-gray-300" id="grid-password" type="text">
+                      border-gray-300" id="grid-password" type="text"/>
+                      <ErrorMessage class="text-red-600 w-full  text-center" name="website"/>
       </div>
     </div>
   </div>
 
-  <div class="flex flex-wrap -mx-3 mb-2">
+  <!-- <div class="flex flex-wrap -mx-3 mb-2">
     <div class="inline-flex items-center px-3">
         <input type="checkbox" class="form-checkbox"/>
         <span class="ml-2">This store is a registered business</span>
       </div>
-  </div>
+  </div> -->
 
   <div class="w-full items-center flex justify-between">
       <router-link to="/" class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-angle-left"></i> Back</router-link>
@@ -182,12 +192,32 @@
               Save
             </button>
   </div>
-</form>
+</vee-form>
 </template>
 
 <script>
 export default {
+data(){
+  return{
+     editprofileschema: {
+        firstName: 'required|alpha_spaces',
+        lastName: 'required|alpha_spaces',
+        address: 'required',
+        apartment: 'required',
+        city: 'required|alpha_spaces',
+        country: '',
+        postalCode:'required|numeric',
+        phone:'required|numeric',
+        website:'required'
+      },
+  }
+},
 
+methods:{
+  submitProfileForm(){
+    console.log(123)
+  }
+}
 }
 </script>
 

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
+import DashboardPage from '../components/Pages/DashboardPage.vue'
 import AllOrders from '../components/AllOrders.vue'
 import Summary from '../components/Summary.vue'
 import AddProduct from '../components/Forms/AddProduct.vue'
@@ -21,8 +22,13 @@ const routes = [
       path:'',
       name:'Dashboard',
       component:Dashboard,
-    redirect: { name: 'AllOrders' },
+    redirect: { name: 'DashboardPage' },
       children:[
+        {
+          path:'dashboard',
+          name:'DashboardPage',
+          component:DashboardPage
+        },
         {
           path:'allorders',
           name:'AllOrders',

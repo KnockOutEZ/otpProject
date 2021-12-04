@@ -1,5 +1,5 @@
 import {
-    Form as VeeForm, Field as VeeField, defineRule, ErrorMessage, configure,
+    Form as VeeForm, Field as VeeField, defineRule, ErrorMessage, configure,ValidationProvider,ValidationObserver
   } from 'vee-validate';
   import {
     required, min, max,numeric,alpha_spaces as alphaSpaces
@@ -10,6 +10,8 @@ import {
       app.component('VeeForm', VeeForm);
       app.component('VeeField', VeeField);
       app.component('ErrorMessage', ErrorMessage);
+      app.component('validation-provider', ValidationProvider);
+      app.component('validation-observer', ValidationObserver);
   
       defineRule('required', required);
       defineRule('numeric', numeric);
