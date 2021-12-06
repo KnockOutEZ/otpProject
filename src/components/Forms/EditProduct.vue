@@ -40,13 +40,11 @@
               
               <div id="theCK" class=" md:w-full w-11/12 flex-1">
                 <ckeditor
-                name="description"
                 :editor="editor"
                 v-model="editorData"
                 :config="editorConfig"
               ></ckeditor>
               </div>
-      <ErrorMessage class="text-red-600 w-full  text-center" name="description"/>
             </div>
           </div>
         </div>
@@ -309,7 +307,6 @@ export default {
         salePrice:'required|numeric',
         quantity:'required|numeric',
         collections:'required',
-        description:'required'
       },
       editor: ClassicEditor,
       editorData: "",

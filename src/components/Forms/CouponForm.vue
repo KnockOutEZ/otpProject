@@ -66,7 +66,6 @@
                   </label>
                   <vee-field v-model="products" type="text" name="products">
                     <Multiselect
-                  name="products"
                    mode="tags"
                   :closeOnSelect="false"
                   :searchable="true"
@@ -75,7 +74,6 @@
       :options="options"
     />
                   </vee-field>
-      <ErrorMessage class="text-red-600 w-full  text-center" name="products"/>
                 </div>
 
                 <div>
@@ -135,6 +133,7 @@
             </div>
           </div>
         </div>
+        <button>test</button>
   </vee-form>
 </template>
 
@@ -148,10 +147,9 @@ export default {
     data(){
         return{
             couponFormSchema:{
-                usagelimitpercoupon:'required|numeric',
+                    usagelimitpercoupon:'required|numeric',
                     usagelimitperuser:'required|numeric',
                     couponExpiryDate:'required',
-                    products:'required|numeric',
                     couponAmount:'required|numeric',
             },
                   value: null,
@@ -161,6 +159,11 @@ export default {
           'Joker',
         ]
         }
+    },
+    methods:{
+      couponForm(values){
+        console.log(values)
+      }
     }
 }
 </script>

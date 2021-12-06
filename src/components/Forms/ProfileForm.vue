@@ -1,5 +1,6 @@
 <template>
-  <vee-form :validation-schema="editprofileschema" @submit="submitProfileForm" class="shadow sm:rounded-md sm:overflow-hidden px-4 py-5 bg-white sm:p-6">
+  <div>
+    <vee-form :validation-schema="editprofileschema" @submit="onSubmit" class="shadow sm:rounded-md sm:overflow-hidden px-4 py-5 bg-white sm:p-6">
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-first-name">
@@ -99,7 +100,7 @@
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-city">
         Country/region
       </label>
-      <vee-field as="select" name="country" class="focus:ring-indigo-500 focus:border-indigo-500 text-black
+      <select v-model="country" class="focus:ring-indigo-500 focus:border-indigo-500 text-black
                       px-3
                       py-2
                       mb-2
@@ -109,12 +110,11 @@
                       sm:text-sm
                       border-2
                       rounded
-                      border-gray-300" id="grid-city" type="text" >
-                      <option>Bangladesh</option>
+                      border-gray-300" required>
+                      <option value="">Bangladesh</option>
   <option>No</option>
   <option>Maybe</option>
-      </vee-field>
-                      <ErrorMessage class="text-red-600 w-full  text-center" name="country"/>
+      </select>
     </div>
     <div class="w-full md:w-2/4 px-3 mb-6 md:mb-0">
       <label class="block text-sm font-medium text-gray-700 mb-2" for="grid-state">
@@ -142,7 +142,7 @@
         Phone
       </label>
       <div class="relative">
-               <vue-tel-input name="phone" class="focus:ring-indigo-500 focus:border-indigo-500
+               <vue-tel-input class="focus:ring-indigo-500 focus:border-indigo-500
                       px-3
                       py-1
                       mb-2
@@ -153,7 +153,6 @@
                       border-2
                       rounded
                       border-gray-300" mode="international" v-model="phone" required></vue-tel-input>
-                      <ErrorMessage class="text-red-600 w-full  text-center" name="phone"/>
       </div>
     </div>
     <div class="w-full md:w-2/4 px-3 mb-6 md:mb-0">
@@ -186,13 +185,14 @@
 
   <div class="w-full items-center flex justify-between">
       <router-link to="/" class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-angle-left"></i> Back</router-link>
-      <button
+      <button 
               class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
             >
               Save
             </button>
   </div>
 </vee-form>
+  </div>
 </template>
 
 <script>
@@ -205,17 +205,17 @@ data(){
         address: 'required',
         apartment: 'required',
         city: 'required|alpha_spaces',
-        country: '',
         postalCode:'required|numeric',
         phone:'required|numeric',
         website:'required'
       },
+      phone:"",
+      country:""
   }
 },
-
 methods:{
-  submitProfileForm(){
-    console.log(123)
+  onSubmit(values){
+    console.log(values)
   }
 }
 }
