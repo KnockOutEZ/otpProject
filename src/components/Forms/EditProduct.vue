@@ -61,10 +61,11 @@
 
               <div>
                  <UploadImages
+                 v-model="image"
                   class="uploadimg"
                   @changed="handleImages"
-                  :max="4"
-                  maxError="Maximum 4 images are allowed"
+                  :max="1"
+                  maxError="Maximum 1 images are allowed"
                   ref="files"
                   uploadMsg="upload product images"
                   required
@@ -296,10 +297,12 @@
 
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import axios from '../../store/axios'
 
 export default {
   data() {
     return {
+      imageName:"",
                   editproductschema: {
         title: 'required|alpha_spaces',
         // fileUpload:'required',
@@ -317,8 +320,36 @@ export default {
   },
   methods:{
     test1(values){
-      console.log(values)
-    }
+      const formData = new FormData();
+formData.append('name', values.title);
+formData.append('regularPrice', values.price);
+formData.append('salesPrice', values.salePrice);
+formData.append('inventory', values.quantity);
+formData.append('image', this.imageName );
+formData.append('description', this.editorData);
+      axios.post(process.env.VUE_APP_API_URL + 'products',formData,{withCredentials:true})
+                 .then((res) => {
+                     //Perform Success Action
+                     console.log(res)
+                     console.log(this.editorData)
+
+                 })
+                 .catch((error) => {
+                     // error.response.status Check status code
+                     console.log(this.imageName)
+                     console.log(error)
+
+                 }).finally(() => {
+                     //Perform action in always
+                     console.log('finally')
+
+                 });
+    },
+
+handleImages(files){
+                  this.imageName = files[0]
+                  console.log(this.imageName)
+}
   }
 };
 </script>
