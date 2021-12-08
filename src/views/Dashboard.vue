@@ -871,7 +871,7 @@
 </template>
 
 <script>
-import axiosJWT from '../store/axios'
+// import axiosJWT from '../store/axios'
 import axios from 'axios'
 
 export default {
@@ -900,17 +900,17 @@ mounted(){
 
 // })
   },
-    beforeRouteEnter(to, from, next) {
-      axiosJWT.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
-        .then((res) => {
-          console.log(res)
-        next();
-      }).catch((error) => {
-        console.log(error)
-        next({ path: '/login' });
+//     beforeRouteEnter(to, from, next) {
+//       axiosJWT.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
+//         .then((res) => {
+//           console.log(res)
+//         next();
+//       }).catch((error) => {
+//         console.log(error)
+//         next({ path: '/login' });
 
-})
-  },
+// })
+//   },
 methods:{
   //   getThemeFromLocalStorage() {
   //   // if user already changed the theme, use it
