@@ -327,7 +327,9 @@ formData.append('salesPrice', values.salePrice);
 formData.append('inventory', values.quantity);
 formData.append('image', this.imageName );
 formData.append('description', this.editorData);
-      axios.post(process.env.VUE_APP_API_URL + 'products',formData,{withCredentials:true})
+
+let routerId = this.$route.params.id
+      axios.post(process.env.VUE_APP_API_URL + 'products/'+ routerId,formData,{withCredentials:true})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
@@ -350,6 +352,25 @@ handleImages(files){
                   this.imageName = files[0]
                   console.log(this.imageName)
 }
+  },
+
+  mounted(){
+    let routerId = this.$route.params.id
+      axios.get(process.env.VUE_APP_API_URL + 'products/'+ routerId,{withCredentials:true})
+                 .then((res) => {
+                     //Perform Success Action
+                     console.log(res)
+                     this.editorData = res
+                 })
+                 .catch((error) => {
+                     // error.response.status Check status code
+                     console.log(error)
+
+                 }).finally(() => {
+                     //Perform action in always
+                     console.log('finally')
+
+                 });
   }
 };
 </script>
