@@ -33,12 +33,12 @@ export default {
   components: { TableLite },
   setup() {
       let products=[]
-      let image=""
-      let name=""
-      let regularPrice=""
-      let salesPrice=""
-      let inventory=""
-      let description=""
+      // let image=""
+      // let name=""
+      // let regularPrice=""
+      // let salesPrice=""
+      // let inventory=""
+      // let description=""
 
 
     axios.get(process.env.VUE_APP_API_URL + 'products',{withCredentials:true})
@@ -46,18 +46,18 @@ export default {
           console.log(res.data.data)
           products = res.data.data
 
-          let maxLength = res.data.data.length
-          for (let i = 0; i < maxLength; i++) {
-          // console.log(res.data.data[i])
-          console.log(name)
-          let daResponse = res.data.data[i]
-          image = daResponse.image
-          name = daResponse.name
-          regularPrice = daResponse.regularPrice
-          salesPrice = daResponse.salesPrice
-          inventory = daResponse.inventory
-          description = daResponse.description
-          }
+          // let maxLength = res.data.data.length
+          // for (let i = 0; i < maxLength; i++) {
+          // // console.log(res.data.data[i])
+          // console.log(name)
+          // let daResponse = res.data.data[i]
+          // image = daResponse.image
+          // name = daResponse.name
+          // regularPrice = daResponse.regularPrice
+          // salesPrice = daResponse.salesPrice
+          // inventory = daResponse.inventory
+          // description = daResponse.description
+          // }
       }).catch((error) => {
         console.log(error)
 })
@@ -148,12 +148,12 @@ setTimeout(function(){
       searchTerm,
       table,
       products,
-      image,
-      name,
-      regularPrice,
-      salesPrice,
-      inventory,
-      description
+      // image,
+      // name,
+      // regularPrice,
+      // salesPrice,
+      // inventory,
+      // description
     };
   },
 
