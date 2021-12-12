@@ -12,6 +12,7 @@
                 Title
               </label>
               <vee-field
+              v-model="title"
               name="title"
                 type="text"
                 class="
@@ -87,6 +88,7 @@
                     Price
                   </label>
                   <vee-field
+                  v-model="price"
                   name="price"
                     type="text"
                     class="
@@ -114,6 +116,7 @@
                     Sale Price
                   </label>
                   <vee-field
+                  v-model="salePrice"
                   name="salePrice"
                     type="text"
                     class="
@@ -142,6 +145,7 @@
                     Quantity
                   </label>
                   <vee-field
+                  v-model="quantity"
                   name="quantity"
                     type="number"
                     class="
@@ -241,6 +245,7 @@
                       ></i>
                     </div>
                     <vee-field
+                  v-model="collections"
                     name="collections"
                       type="text"
                       class="
@@ -313,6 +318,12 @@ export default {
       },
       editor: ClassicEditor,
       editorData: "",
+      title:"",
+      image:"",
+      price:"",
+      salePrice:"",
+      quantity:"",
+      collections:"",
       editorConfig: {
         // The configuration of the editor.
       },
@@ -329,7 +340,7 @@ formData.append('image', this.imageName );
 formData.append('description', this.editorData);
 
 let routerId = this.$route.params.id
-      axios.post(process.env.VUE_APP_API_URL + 'products/'+ routerId,formData,{withCredentials:true})
+      axios.patch(process.env.VUE_APP_API_URL + 'products/'+ routerId,formData,{withCredentials:true})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
@@ -360,7 +371,14 @@ handleImages(files){
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
-                     this.editorData = res
+                     const response= res.data.data
+                     this.editorData = response.description
+                     this.title = response.name
+                     this.price = response.regularPrice
+                     this.salePrice = response.salesPrice
+                     this.quantity = response.inventory
+                     this.collections = response.name
+                     this.image = response.image
                  })
                  .catch((error) => {
                      // error.response.status Check status code

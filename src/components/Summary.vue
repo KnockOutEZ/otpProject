@@ -25,6 +25,7 @@ export default{
     },
   },
   setup() {
+     const data1 = reactive([]);
     let products=[]
       // let image=""
       // let ProductId=""
@@ -39,7 +40,20 @@ export default{
         .then((res) => {
           console.log(res.data.data)
           products = res.data.data
-
+          let maxLength = products.length
+      console.log(maxLength)
+  for (let i = 0; i < maxLength; i++) {
+      data1.push({
+        id: i,
+        name: products[i].name,
+        inventory: products[i].inventory,
+        description: products[i].description,
+        regularPrice: products[i].regularPrice,
+        salesPrice: products[i].salesPrice,
+        image: products[i].image,
+        editUrl:"editproduct/" + products[i]._id
+      });
+    }
           // let maxLength = res.data.data.length
           // for (let i = 0; i < maxLength; i++) {
           // // console.log(res.data.data[i])
@@ -58,23 +72,10 @@ export default{
         console.log(error)
 })
     // Fake data
-    const data1 = reactive([]);
-    setTimeout(function(){
-      let maxLength = products.length
-      console.log(maxLength)
-  for (let i = 0; i < maxLength; i++) {
-      data1.push({
-        id: i,
-        name: products[i].name,
-        inventory: products[i].inventory,
-        description: products[i].description,
-        regularPrice: products[i].regularPrice,
-        salesPrice: products[i].salesPrice,
-        image: products[i].image,
-        editUrl:"editproduct/" + products[i]._id
-      });
-    }
-},3000);
+   
+    // setTimeout(function(){
+      
+// },3000);
     // Table config
     const table = reactive({
       columns: [
