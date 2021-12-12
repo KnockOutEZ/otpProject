@@ -27,6 +27,7 @@ export default{
   setup() {
     let products=[]
       // let image=""
+      // let ProductId=""
       // let name=""
       // let regularPrice=""
       // let salesPrice=""
@@ -45,6 +46,8 @@ export default{
           // console.log(name)
           // let daResponse = res.data.data[i]
           // image = daResponse.image
+          // ProductId = daResponse._id
+          // console.log(ProductId)
           // name = daResponse.name
           // regularPrice = daResponse.regularPrice
           // salesPrice = daResponse.salesPrice
@@ -68,7 +71,7 @@ export default{
         regularPrice: products[i].regularPrice,
         salesPrice: products[i].salesPrice,
         image: products[i].image,
-        editUrl:"editproduct/" + i
+        editUrl:"editproduct/" + products[i]._id
       });
     }
 },3000);
