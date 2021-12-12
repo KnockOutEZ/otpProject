@@ -32,6 +32,7 @@ import axios from "../store/axios";
 export default {
   components: { TableLite },
   setup() {
+    const data1 = reactive([]);
       let products=[]
       // let image=""
       // let name=""
@@ -45,6 +46,18 @@ export default {
         .then((res) => {
           console.log(res.data.data)
           products = res.data.data
+          let maxLength = products.length
+      console.log(maxLength)
+  for (let i = 0; i < maxLength; i++) {
+      data1.push({
+        id: i,
+        name: products[i].name,
+        inventory: products[i].inventory,
+        description: products[i].description,
+        regularPrice: products[i].regularPrice,
+        salesPrice: products[i].salesPrice,
+      });
+    }
 
           // let maxLength = res.data.data.length
           // for (let i = 0; i < maxLength; i++) {
@@ -68,22 +81,8 @@ export default {
     const searchTerm = ref("");
     // Fake data
     
-    const data1 = reactive([]);
 
-setTimeout(function(){
-      let maxLength = products.length
-      console.log(maxLength)
-  for (let i = 0; i < maxLength; i++) {
-      data1.push({
-        id: i,
-        name: products[i].name,
-        inventory: products[i].inventory,
-        description: products[i].description,
-        regularPrice: products[i].regularPrice,
-        salesPrice: products[i].salesPrice,
-      });
-    }
-},3000);
+      
 
     // Table config
     const table = reactive({

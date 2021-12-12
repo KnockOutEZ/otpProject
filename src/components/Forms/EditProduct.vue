@@ -360,12 +360,19 @@ let routerId = this.$route.params.id
     },
 
 handleImages(files){
-                  this.imageName = files[0]
-                  console.log(this.imageName)
+                  if(files != null){
+this.imageName = files[0]
+                    console.log(files)
+                  }else{
+                    files= this.image
+                    console.log(this.image)
+                  }
+                  console.log(files)
 }
   },
 
   mounted(){
+    
     let routerId = this.$route.params.id
       axios.get(process.env.VUE_APP_API_URL + 'products/'+ routerId,{withCredentials:true})
                  .then((res) => {
@@ -379,6 +386,7 @@ handleImages(files){
                      this.quantity = response.inventory
                      this.collections = response.name
                      this.image = response.image
+                     this.handleImages()
                  })
                  .catch((error) => {
                      // error.response.status Check status code
