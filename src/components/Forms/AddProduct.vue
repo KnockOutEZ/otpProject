@@ -329,6 +329,7 @@ formData.append('description', this.editorData);
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
+                     this.$router.push("/")
                  })
                  .catch((error) => {
                      // error.response.status Check status code
