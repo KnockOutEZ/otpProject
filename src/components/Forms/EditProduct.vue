@@ -59,8 +59,8 @@
               >
                 Media
               </label>
-
-              <div>
+              
+              <div v-if="image == ''">
                  <UploadImages
                  v-model="image"
                   class="uploadimg"
@@ -71,6 +71,10 @@
                   uploadMsg="upload product images"
                   required
                 />
+              </div>
+              <div v-else class="w-64 h-64 mx-auto relative" >
+                <span  @click="image = ''" class="absolute top-0 right-2 px-2 py-1 cursor-pointer text-white rounded-full bg-red-700"><i class="fas fa-trash"></i></span>
+               <a :href="image" target="_blank"> <img  class="max-w-64 max-h-64 mx-auto" :src="image" alt=""></a>
               </div>
             </div>
           </div>
@@ -345,6 +349,7 @@ let routerId = this.$route.params.id
                      //Perform Success Action
                      console.log(res)
                      console.log(this.editorData)
+                     this.$router.push("/")
 
                  })
                  .catch((error) => {
@@ -365,7 +370,6 @@ this.imageName = files[0]
                     console.log(files)
                   }else{
                     files= this.image
-                    console.log(this.image)
                   }
                   console.log(files)
 }

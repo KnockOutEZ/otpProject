@@ -62,6 +62,36 @@
         :to="{ path: '/editproduct/' + data.value.editUrl,params: { id: data.value.editUrl }}"
         >Edit</router-link>
     </template>
+
+    <template v-slot:delete="data">
+      <button
+        class="
+          formOpen
+          mx-auto
+          is-rows-el
+          quick-btn
+          flex
+          items-center
+          justify-between
+          px-4
+          py-2
+          text-sm
+          font-medium
+          leading-5
+          text-white
+          transition-colors
+          duration-150
+          bg-red-600
+          border border-transparent
+          rounded-lg
+          active:bg-red-600
+          hover:bg-red-700
+          focus:outline-none focus:shadow-outline-red
+          w-min
+        "
+        @click="deleteProduct(data.value.editUrl)"
+        >Delete</button>
+    </template>
   </table-lite>
 </template>
 
@@ -77,6 +107,17 @@ export default {
     formOpen() {
       this.$router.push("/editproduct");
     },
+    deleteProduct(data){
+      console.log(data)
+      axios
+      .delete(process.env.VUE_APP_API_URL + "products/" + data, { withCredentials: true })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
   },
   setup() {
     const data1 = reactive([]);
@@ -195,6 +236,11 @@ export default {
         {
           label: "Edit",
           field: "quick",
+          width: "5%",
+        },
+        {
+          label: "Delete",
+          field: "delete",
           width: "5%",
         },
       ],
