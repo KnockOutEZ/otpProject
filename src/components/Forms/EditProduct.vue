@@ -387,6 +387,17 @@ this.imageName = files[0]
                      this.collections = response.name
                      this.image = response.image
                      this.handleImages()
+      //                fetch(this.image)
+      // .then((e) => {
+      //   return e.blob()
+      // })
+      // .then((blob) => {
+      //   let b = blob
+      //   b.lastModifiedDate = new Date()
+      //   b.name = ''
+      //   console.log(b)
+      //   return b
+      // })
                  })
                  .catch((error) => {
                      // error.response.status Check status code
