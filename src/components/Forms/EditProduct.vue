@@ -72,7 +72,7 @@
                   required
                 />
               </div>
-              <div v-else class="w-64 h-64 mx-auto relative" >
+              <div v-else class="w-64 h-auto mx-auto relative" >
                 <span  @click="image = ''" class="absolute top-0 right-2 px-2 py-1 cursor-pointer text-white rounded-full bg-red-700"><i class="fas fa-trash"></i></span>
                <a :href="image" target="_blank"> <img  class="max-w-64 max-h-64 mx-auto" :src="image" alt=""></a>
               </div>
