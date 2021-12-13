@@ -16,6 +16,7 @@
 import { reactive, computed } from "vue";
 import TableLite from "vue3-table-lite";
 import axios from "../store/axios"
+// import routerLink from "../router/index"
 export default{
   name: "App",
   components: { TableLite },
@@ -77,6 +78,7 @@ export default{
       
 // },3000);
     // Table config
+    
     const table = reactive({
       columns: [
         {
@@ -140,12 +142,9 @@ display: function (rows) {
           width: "5%",
           display: function (rows) {
             return (
-              '<a href="'+rows.editUrl+'" data-id="' +
-              rows.id +
+              '<a href="'+rows.editUrl +
               '" class="formOpen mx-auto is-rows-el quick-btn flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple w-min">' +
-              
-              "Edit </a>"
-              
+              "Edit </a>" 
             );
           },
         },
