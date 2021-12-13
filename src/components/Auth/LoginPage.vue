@@ -12,8 +12,21 @@
         <vee-field name="trd" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " disabled type="text" id="third" maxlength="1" v-on:keyup="clickevent()" />
         <vee-field name="fth" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " disabled type="text" id="fourth" maxlength="1" v-on:keyup="test()"/>
       </div> -->
-      <input v-if="input" v-on:keyup="checkSubmitBtn()" id="otpInput" placeholder="0000" v-model="otp" type="text" maxlength="4" class="tracking-widest border-2 transition duration-500 placeholder-indigo-400 focus:placeholder-transparent border-indigo-400 mb-1 w-full p-2 text-left text-indigo-400 bg-transparent rounded-md focus:outline-none "/>
-
+      <!-- <input  v-on:keyup="checkSubmitBtn()" id="otpInput" placeholder="0000" type="text" maxlength="4" class="tracking-widest border-2 transition duration-500 placeholder-indigo-400 focus:placeholder-transparent border-indigo-400 mb-1 w-full p-2 text-left text-indigo-400 bg-transparent rounded-md focus:outline-none "/> -->
+      <div v-if="input" style="display: flex; flex-direction: row;">
+    <OtpInput
+    id="otpInput"
+      ref="otpInput"
+      input-classes="otp-input"
+      separator="-"
+      :num-inputs="4"
+      :should-auto-focus="true"
+      :is-input-num="true"
+      @on-change="handleOnChange"
+      @on-complete="checkSubmitBtn"
+      v-model="otp"
+    />
+  </div>
       <button v-if="resend" @click="resend1()" class="text-green-400 text-right w-full">Resend code?</button>
       
       <vue-countdown v-if="timer"  :time=" 60 * 3 * 1000" v-slot="{ minutes, seconds }">
@@ -33,13 +46,24 @@
 <script>
 import axios from 'axios'
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import OtpInput from 'vue3-otp-input';
+import { ref } from "vue";
 
 
 
 export default {
   name: 'LoginPage',
     components: {
-      VueCountdown
+      VueCountdown,
+      OtpInput,
+  },
+  setup() {
+    const otpInput = ref(null)
+     const clearInput = () => {
+      otpInput.value.clearInput()
+    }
+
+    return { clearInput, otpInput };
   },
   data(){
     return{
@@ -62,6 +86,15 @@ export default {
   },
 
 methods:{
+  handleOnComplete(value) {
+      console.log('OTP completed: ', value);
+      this.otp = value
+    },
+
+    handleOnChange(value){
+      console.log('OTP changed: ', value);
+      this.otp = value
+    },
   // loginForm(){
   //   console.log(this.message)
   // },
@@ -99,6 +132,7 @@ methods:{
                  .catch((error) => {
                      // error.response.status Check status code
                      console.log(error)
+                     console.log(this.otp)
 
                  }).finally(() => {
                      //Perform action in always
@@ -159,10 +193,10 @@ var doc = document.getElementById('mainInput')
       }
     },
 
-checkSubmitBtn(){
-  if(this.otp.length == 4){
+checkSubmitBtn(value){
+  if(value.length == 4){
     this.isDisabled = !this.isDisabled
-    console.log(this.otp)
+    console.log(value)
   }
 },
 
