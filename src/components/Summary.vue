@@ -14,7 +14,7 @@
       {{ data.value.name }}
     </template>
     <template v-slot:inventory="data">
-      {{ data.value.name }}
+      {{ data.value.inventory }}
     </template>
 
     <template v-slot:regularPrice="data">
@@ -26,7 +26,7 @@
     </template>
 
     <template v-slot:description="data">
-      {{ data.value.description }}
+      <span v-html="data.value.description"></span>
     </template>
 
     <template v-slot:id="data">
@@ -92,6 +92,82 @@
         @click="deleteProduct(data.value.editUrl)"
         >Delete</button>
     </template>
+    <template v-slot:stock="data">
+      <button
+        class="
+          formOpen
+          mx-auto
+          is-rows-el
+          quick-btn
+          flex
+          items-center
+          justify-between
+          px-4
+          py-2
+          text-sm
+          font-medium
+          leading-5
+          text-white
+          transition-colors
+          duration-150
+          bg-indigo-600
+          border border-transparent
+          rounded-lg
+          active:bg-indigo-600
+          hover:bg-indigo-700
+          focus:outline-none focus:shadow-outline-indigo
+          w-min
+        "
+        @click="requestProduct(data.value.editUrl)"
+        ><nobr>Request</nobr></button>
+    </template>
+    <template v-slot:status="data">
+     <div
+                  class="
+                    relative
+                    inline-block
+                    w-10
+                    mr-2
+                    align-middle
+                    select-none
+                    transition
+                    duration-200
+                    ease-in
+                  "
+                >
+                  <input
+                  v-model="data.value.status"
+                    type="checkbox"
+                    name="toggle"
+                    @change="statusChange(data.value.editUrl,data.value.id,data.value.status)"
+                    v-bind:id="data.value.editUrl"
+                    class="
+                      toggle-checkbox
+                      absolute
+                      block
+                      w-6
+                      h-6
+                      rounded-full
+                      bg-white
+                      border-4
+                      appearance-none
+                      cursor-pointer
+                    "
+                  />
+                  <label
+                    :for="data.value.editUrl"
+                    class="
+                      toggle-label
+                      block
+                      overflow-hidden
+                      h-6
+                      rounded-full
+                      bg-gray-300
+                      cursor-pointer
+                    "
+                  ></label>
+                </div>
+    </template>
   </table-lite>
 </template>
 
@@ -103,9 +179,28 @@ import axios from "../store/axios";
 export default {
   name: "App",
   components: { TableLite },
+  data(){
+    return{
+      componentKey: 0,
+    }
+  },
   methods: {
     formOpen() {
       this.$router.push("/editproduct");
+    },
+    statusChange(productId,index,status){
+      console.log(productId,index,status)
+      axios
+      .patch(process.env.VUE_APP_API_URL + "products/" + productId,{status:status},{ withCredentials: true })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+    requestProduct(productId){
+      console.log(productId)
     },
     deleteProduct(data){
       console.log(data)
@@ -113,6 +208,7 @@ export default {
       .delete(process.env.VUE_APP_API_URL + "products/" + data, { withCredentials: true })
       .then((res) => {
         console.log(res)
+      this.$router.go(0)
       })
       .catch((error) => {
         console.log(error);
@@ -147,6 +243,7 @@ export default {
             salesPrice: products[i].salesPrice,
             image: products[i].image,
             editUrl:products[i]._id,
+            status:products[i].status
           });
         }
         // let maxLength = res.data.data.length
@@ -179,7 +276,7 @@ export default {
         {
           label: "ID",
           field: "id",
-          width: "3%",
+          width: "2%",
           sortable: true,
           isKey: true,
         },
@@ -202,9 +299,9 @@ export default {
           sortable: true,
         },
         {
-          label: "regular Price",
+          label: "Price",
           field: "regularPrice",
-          width: "15%",
+          width: "10%",
           sortable: true,
         },
         {
@@ -234,6 +331,11 @@ export default {
           },
         },
         {
+          label: "Status",
+          field: "status",
+          width: "5%",
+        },
+        {
           label: "Edit",
           field: "quick",
           width: "5%",
@@ -241,6 +343,11 @@ export default {
         {
           label: "Delete",
           field: "delete",
+          width: "5%",
+        },
+        {
+          label: "Stock Request",
+          field: "stock",
           width: "5%",
         },
       ],
@@ -260,3 +367,27 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+.card ::v-deep(.table .thead-dark th) {
+  color: #fff;
+  background-color: #7C3AED;
+  border-color: #7C3AED;
+}
+.card ::v-deep(.table td), .card ::v-deep(.table tr) {
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgb(228, 227, 227);
+}
+
+.card ::v-deep(.table tr:hover){
+  background-color: rgb(238, 237, 237);
+}
+
+.card ::v-deep(.table tr td){
+  width: 100px;
+  white-space: normal;
+  vertical-align:middle
+}
+</style>

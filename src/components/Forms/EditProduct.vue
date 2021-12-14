@@ -197,10 +197,11 @@
                     ease-in
                   "
                 >
-                  <vee-field
+                  <input
+                  v-model="status"
                     type="checkbox"
                     name="toggle"
-                    id="toggle"
+                    v-bind:id="productId"
                     class="
                       toggle-checkbox
                       absolute
@@ -215,7 +216,7 @@
                     "
                   />
                   <label
-                    for="toggle"
+                    :for="productId"
                     class="
                       toggle-label
                       block
@@ -323,10 +324,12 @@ export default {
       editor: ClassicEditor,
       editorData: "",
       title:"",
+      status:"",
       image:"",
       price:"",
       salePrice:"",
       quantity:"",
+      productId:"",
       collections:"",
       editorConfig: {
         // The configuration of the editor.
@@ -342,6 +345,7 @@ formData.append('salesPrice', values.salePrice);
 formData.append('inventory', values.quantity);
 formData.append('image', this.imageName );
 formData.append('description', this.editorData);
+formData.append('status', this.status);
 
 let routerId = this.$route.params.id
       axios.patch(process.env.VUE_APP_API_URL + 'products/'+ routerId,formData,{withCredentials:true})
@@ -390,6 +394,9 @@ this.imageName = files[0]
                      this.quantity = response.inventory
                      this.collections = response.name
                      this.image = response.image
+                     this.status = response.status
+                     this.productId = response._id
+                     console.log(this.status)
                      this.handleImages()
       //                fetch(this.image)
       // .then((e) => {
@@ -416,7 +423,7 @@ this.imageName = files[0]
 };
 </script>
 
-<style scoped>
+<style>
 .toggle-checkbox:checked {
   @apply: right-0 border-green-400;
   right: 0;

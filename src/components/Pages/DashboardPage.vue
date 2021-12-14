@@ -1,4 +1,13 @@
 <template>
+<div v-if="$store.state.profileComplete == true">
+  <div class="mb-5 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+  <strong class="font-bold">Holy smokes!</strong>
+  <span class="block sm:inline"> You haven't completed your profile yet!!</span>
+  <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+    <router-link class="hover:font-bold" to="/profile">Profile <i class="fas fa-angle-right"></i></router-link>
+  </span>
+</div>
+</div>
   <div class="grid gap-6 mb-4 md:grid-cols-2 xl:grid-cols-4">
               <!-- Card -->
               <div
@@ -112,8 +121,24 @@
 </template>
 
 <script>
-export default {
+import axios from "../../store/axios";
 
+export default {
+  created(){
+axios.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
+        .then((res) => {
+          let daResponse = res.data.data
+          if(daResponse.email == undefined || daResponse.number ==undefined ||  daResponse.firstName ==undefined ||  daResponse.lastName==undefined ||  daResponse.address==undefined ||  daResponse.apartment==undefined ||  daResponse.city==undefined ||  daResponse.country==undefined ||  daResponse.postalCode==undefined || daResponse.website==undefined){
+            this.$store.state.profileComplete = true
+          }else{
+            this.$store.state.profileComplete = false
+          }
+          
+      }).catch((error) => {
+        console.log(error)
+
+})
+  }
 }
 </script>
 

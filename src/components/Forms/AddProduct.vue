@@ -187,7 +187,8 @@
                     ease-in
                   "
                 >
-                  <vee-field
+                  <input
+                  v-model="status"
                     type="checkbox"
                     name="toggle"
                     id="toggle"
@@ -311,6 +312,7 @@ export default {
       },
       editor: ClassicEditor,
       editorData: "",
+      status:false,
       editorConfig: {
         // The configuration of the editor.
       },
@@ -325,6 +327,7 @@ formData.append('salesPrice', values.salePrice);
 formData.append('inventory', values.quantity);
 formData.append('image', this.imageName );
 formData.append('description', this.editorData);
+formData.append('status', this.status);
       axios.post(process.env.VUE_APP_API_URL + 'products',formData,{withCredentials:true})
                  .then((res) => {
                      //Perform Success Action

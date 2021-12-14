@@ -113,7 +113,7 @@ export default {
           sortable: true,
         },
         {
-          label: "regular Price",
+          label: "Price",
           field: "regularPrice",
           width: "15%",
           sortable: true,

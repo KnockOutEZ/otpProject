@@ -451,16 +451,17 @@ export default {
 axios.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
         .then((res) => {
           let daResponse = res.data.data
-          this.email = daResponse.email
-          this.phone = daResponse.number
-          this.firstName = daResponse.firstName
-          this.lastName = daResponse.lastName
-          this.address = daResponse.address
-          this.apartment = daResponse.apartment
-          this.city = daResponse.city
-          document.getElementById("country").value = daResponse.country
-          this.postalCode = daResponse.postalCode
-          this.website = daResponse.website
+if (daResponse.email) this.email = daResponse.email;
+if (daResponse.number) this.phone = daResponse.number;
+if (daResponse.firstName) this.firstName = daResponse.firstName;
+if (daResponse.lastName) this.lastName = daResponse.lastName;
+if (daResponse.address) this.address = daResponse.address;
+if (daResponse.apartment) this.apartment = daResponse.apartment;
+if (daResponse.city) this.city = daResponse.city;
+if (daResponse.country) document.getElementById('country').value = daResponse.country;
+if (daResponse.postalCode) this.postalCode = daResponse.postalCode;
+if (daResponse.website) this.website = daResponse.website;
+          
       }).catch((error) => {
         console.log(error)
 
