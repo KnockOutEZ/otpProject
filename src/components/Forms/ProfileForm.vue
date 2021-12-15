@@ -266,6 +266,29 @@
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full md:w-2/4 px-3 mb-6 md:mb-0">
+        <!-- <div>
+                  <label
+                    for="company_website"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Phone
+                  </label>
+                  <div class="relative flex w-full flex-wrap items-stretch">
+  <span class="z-10 h-full leading-snug font-normal absolute text-center text-gray-500 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-2">
+    <i class="fas fa-percent"></i>
+  </span>
+  <vee-field v-model="phone" name="phone" id="phone" type="text" class="pl-8 focus:ring-indigo-500 focus:border-indigo-500
+                      px-3
+                      py-2
+                      mb-2
+                      flex-1
+                      block
+                      w-full
+                      sm:text-sm
+                      border-2
+                      rounded
+                      border-gray-300"/>
+</div></div> -->
           <label
             class="block text-sm font-medium text-gray-700 mb-2"
             for="grid-city"
@@ -461,7 +484,6 @@ if (daResponse.city) this.city = daResponse.city;
 if (daResponse.country) document.getElementById('country').value = daResponse.country;
 if (daResponse.postalCode) this.postalCode = daResponse.postalCode;
 if (daResponse.website) this.website = daResponse.website;
-          
       }).catch((error) => {
         console.log(error)
 
