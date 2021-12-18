@@ -3,7 +3,7 @@
     <div class="flex flex-col justify-center items-center h-screen bg-gray-100 ">
       <vee-form :validation-schema="loginschema" class="md:w-4/12 sm:w-screen bg-gray-50 p-10 rounded-lg">
       <h1 class="font-bold text-xl mb-2">Please enter your number:</h1>
-     <vee-field v-model="message" placeholder="01XXXXXXXXX" name="number" type="text"  id="mainInput" @input="lengthHandler()"
+     <vee-field v-model="message" placeholder="8801XXXXXXXXX" name="number" type="text"  id="mainInput" @input="lengthHandler()"
         class="border-2 transition duration-500 placeholder-indigo-400 focus:placeholder-transparent border-indigo-400 mb-1 w-full p-2 text-left text-indigo-400 bg-transparent rounded-md focus:outline-none "/><br/>
       <ErrorMessage class="text-red-600 w-full  text-center" name="number"/>
       <!-- <div class="w-full grid grid-cols-4 gap-4 mt-2" v-if="input == true" id="otp">

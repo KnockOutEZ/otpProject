@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3">
+        <div class="w-full md:w-1/2 px-3">
           <label
             class="block text-sm font-medium text-gray-700 mb-2"
             for="grid-password"
@@ -99,6 +99,34 @@
             type="text"
           />
           <ErrorMessage class="text-red-600 w-full text-center" name="email" />
+        </div>
+        <div class="w-full md:w-1/2 px-3">
+          <label
+            class="block text-sm font-medium text-gray-700 mb-2"
+            for="grid-password"
+          >
+            Store Name
+          </label>
+          <vee-field
+            v-model="storeName"
+            name="storeName"
+            class="
+              focus:ring-indigo-500 focus:border-indigo-500
+              px-3
+              py-2
+              mb-2
+              flex-1
+              block
+              w-full
+              sm:text-sm
+              border-2
+              rounded
+              border-gray-300
+            "
+            id="grid-password"
+            type="text"
+          />
+          <ErrorMessage class="text-red-600 w-full text-center" name="storeName" />
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -419,8 +447,9 @@ export default {
         apartment: "required",
         city: "required|alpha_spaces",
         postalCode: "required|numeric",
-        website: "required",
+        website: "",
         phone: "required|numeric",
+        storeName:"required"
       },
       email: "",
       firstName: "",

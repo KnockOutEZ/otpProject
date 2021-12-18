@@ -90,7 +90,7 @@
                   :searchable="true"
                   :createTag="false"
       v-model="value"
-      :options="options.name"
+      :options="options"
     />
                 </div>
 
@@ -175,9 +175,8 @@ export default {
                     couponName:'required'
             },
                   value: null,
-        options: {
-          name:[],id:[]
-        }
+        options: [
+        ]
         }
     },
     mounted(){
@@ -189,8 +188,7 @@ export default {
         let maxLength = products.length;
         for (let i = 0; i < maxLength; i++) {
           console.log(products[i].name)
-          this.options.name.push(products[i].name)
-          this.options.id.push(products[i]._id)
+          this.options.push(products[i].name)
         }
       }).catch((error) => {
         console.log(error)
@@ -208,9 +206,8 @@ export default {
       couponForm(values){
         console.log(values)
          axios
-      .post(process.env.VUE_APP_API_URL + "coupon",{productIds:this.value,name:values.couponName,amount:values.couponAmount,limitPerUser:values.usagelimitperuser,limitPerCoupon:values.usagelimitpercoupon,expiryDate:values.couponExpiryDate}, { withCredentials: true })
+      .patch(process.env.VUE_APP_API_URL + "coupon/" + this.$route.params.id,{name:values.couponName,amount:values.couponAmount,limitPerUser:values.usagelimitperuser,limitPerCoupon:values.usagelimitpercoupon,expiryDate:values.couponExpiryDate}, { withCredentials: true })
       .then((res) => {
-        console.log(this.options.id)
         console.log(res);
       }).catch((error) => {
         console.log(error)
