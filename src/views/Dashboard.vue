@@ -328,11 +328,12 @@
             </router-link>
           </div>
           <div class="px-6 my-2">
-            <router-link to="/addproduct"
-              class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg opacity-50 cursor-not-allowed focus:outline-none"
+            <!-- opacity-50 cursor-not-allowed -->
+            <button
+              class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg  focus:outline-none"
             >
-              Preview Shop
-            </router-link>
+              <a href="https://sellbee-user.netlify.app/#/" target="__black">Preview Shop</a>
+            </button>
           </div>
         </div>
       </aside>

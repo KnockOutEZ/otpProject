@@ -102,7 +102,7 @@ export default {
        category(values){
         console.log(values)
          axios
-      .patch(process.env.VUE_APP_API_URL + "collections/" + + this.$route.params.id,{name:this.categoryName,productIds:this.value}, { withCredentials: true })
+      .patch(process.env.VUE_APP_API_URL + "collections/" + this.$route.params.id,{name:this.categoryName,productIds:this.value}, { withCredentials: true })
       .then((res) => {
         console.log(res);
       }).catch((error) => {
