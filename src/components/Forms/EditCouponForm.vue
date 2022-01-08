@@ -209,6 +209,7 @@ export default {
       .patch(process.env.VUE_APP_API_URL + "coupon/" + this.$route.params.id,{name:values.couponName,amount:values.couponAmount,limitPerUser:values.usagelimitperuser,limitPerCoupon:values.usagelimitpercoupon,expiryDate:values.couponExpiryDate}, { withCredentials: true })
       .then((res) => {
         console.log(res);
+        this.$router.push("/allcoupons")
       }).catch((error) => {
         console.log(error)
 })

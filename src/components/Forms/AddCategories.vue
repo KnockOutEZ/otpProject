@@ -94,6 +94,7 @@ export default {
       .post(process.env.VUE_APP_API_URL + "collections",{name:this.categoryName,productIds:this.value}, { withCredentials: true })
       .then((res) => {
         console.log(res);
+        this.$router.push("/allcategories")
       }).catch((error) => {
         console.log(error)
 })

@@ -467,7 +467,7 @@ export default {
       let country = document.getElementById("country").value
       axios
         .patch(
-          process.env.VUE_APP_API_URL + "auth/profile-update",
+          process.env.VUE_APP_API_URL + "vendor/profile-update",
           {
             email: this.email,
             number: this.phone,
@@ -500,7 +500,7 @@ export default {
   },
 
   mounted(){
-axios.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
+axios.get(process.env.VUE_APP_API_URL + 'vendor/get-me',{withCredentials:true})
         .then((res) => {
           let daResponse = res.data.data
 if (daResponse.email) this.email = daResponse.email;

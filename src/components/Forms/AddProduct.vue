@@ -332,7 +332,7 @@ formData.append('status', this.status);
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
-                     this.$router.push("/")
+                     this.$router.push("/summary")
                  })
                  .catch((error) => {
                      // error.response.status Check status code

@@ -100,7 +100,7 @@ methods:{
   // },
 // https://sellbee-api.herokuapp.com/v1/auth/verify-otp
   numberMethod () {
-  axios.post(process.env.VUE_APP_API_URL + 'auth/login', {number: this.message})
+  axios.post(process.env.VUE_APP_API_URL + 'vendor/login', {number: this.message})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
@@ -121,7 +121,7 @@ methods:{
 // https://sellbee-api.herokuapp.com/v1/auth/verify-otp
 // {withCredentials:true}
           otpMethod () {
-  axios.post(process.env.VUE_APP_API_URL + 'auth/verify-otp', {number: this.message,otp:this.otp},{withCredentials:true})
+  axios.post(process.env.VUE_APP_API_URL + 'vendor/verify-otp', {number: this.message,otp:this.otp},{withCredentials:true})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)

@@ -10,7 +10,7 @@ import axios from "axios";
 const authTokenRefresh = async () => {
     try {
   
-      await axios.get(process.env.VUE_APP_API_URL + "auth/refresh",{withCredentials:true});
+      await axios.get(process.env.VUE_APP_API_URL + "vendor/refresh",{withCredentials:true});
     } catch (err) {
       console.log(err);
     }

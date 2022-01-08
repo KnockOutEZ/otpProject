@@ -211,6 +211,7 @@ export default {
       .post(process.env.VUE_APP_API_URL + "coupon",{productIds:this.value,name:values.couponName,amount:values.couponAmount,limitPerUser:values.usagelimitperuser,limitPerCoupon:values.usagelimitpercoupon,expiryDate:values.couponExpiryDate}, { withCredentials: true })
       .then((res) => {
         console.log(this.options.id)
+        this.$router.push("/allcoupons")
         console.log(res);
       }).catch((error) => {
         console.log(error)

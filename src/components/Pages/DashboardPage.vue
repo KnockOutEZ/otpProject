@@ -125,7 +125,7 @@ import axios from "../../store/axios";
 
 export default {
   created(){
-axios.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
+axios.get(process.env.VUE_APP_API_URL + 'vendor/get-me',{withCredentials:true})
         .then((res) => {
           let daResponse = res.data.data
           if(daResponse.email == undefined || daResponse.number ==undefined ||  daResponse.firstName ==undefined ||  daResponse.lastName==undefined ||  daResponse.address==undefined ||  daResponse.apartment==undefined ||  daResponse.city==undefined ||  daResponse.country==undefined ||  daResponse.postalCode==undefined || daResponse.website==undefined){

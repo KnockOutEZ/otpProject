@@ -997,7 +997,7 @@ data(){
 mounted(){
   console.log(this.$store.state.isAuthenticated)
 
-//   axios.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
+//   axios.get(process.env.VUE_APP_API_URL + 'vendor/get-me',{withCredentials:true})
 //         .then((res) => {
 //           console.log(res)
 //         this.$routes.push({name:'Home'});
@@ -1008,7 +1008,7 @@ mounted(){
 // })
   },
     beforeRouteEnter(to, from, next) {
-      axiosJWT.get(process.env.VUE_APP_API_URL + 'auth/get-me',{withCredentials:true})
+      axiosJWT.get(process.env.VUE_APP_API_URL + 'vendor/get-me',{withCredentials:true})
         .then((res) => {
           console.log(res)
         next();
@@ -1075,7 +1075,7 @@ methods:{
 
     logOut(){
       
-      axios.delete(process.env.VUE_APP_API_URL + 'auth/logout',{withCredentials:true})
+      axios.delete(process.env.VUE_APP_API_URL + 'vendor/logout',{withCredentials:true})
         .then((res) => {
                      //Perform Success Action
                      console.log(res)
