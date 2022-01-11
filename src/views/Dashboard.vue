@@ -102,8 +102,9 @@
             <li class="relative px-6 py-3">
               <router-link
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                to="/analytics"
+                to="/"
               >
+              <!-- to="/analytics" -->
               <span
                 class="daActive absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                 aria-hidden="true"
@@ -129,7 +130,8 @@
             </li>
 
             <li class="relative px-6 py-3">
-              <router-link to="/allcoupons"
+              <!-- to="/allcoupons" -->
+              <router-link to="/"
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 @click="togglePagesMenu"
                 aria-haspopup="true"
@@ -178,12 +180,14 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <router-link to="/allcoupons" class="w-full">All Coupon</router-link>
+                  <!-- to="/allcoupons" -->
+                    <router-link to="/" class="w-full">All Coupon</router-link>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <router-link to="/addcoupon" class="w-full">
+                  <!-- to="/addcoupon" -->
+                    <router-link to="/" class="w-full">
                       Add Coupon
                     </router-link>
                   </li>
@@ -192,7 +196,8 @@
             </li>
 
             <li class="relative px-6 py-3">
-              <router-link to="/allcategories"
+              <!-- to="/allcategories" -->
+              <router-link to="/"
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 @click="togglePagesMenu1"
                 aria-haspopup="true"
@@ -241,7 +246,8 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <router-link to="/allcategories" class="w-full">All Category</router-link>
+                  <!-- to="/allcategories" -->
+                    <router-link to="/" class="w-full">All Category</router-link>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -453,8 +459,9 @@
             <li class="relative px-6 py-3">
               <router-link
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                to="/analytics"
+                to="/"
               >
+              <!-- to="/analytics" -->
               <span
                 class="daActive absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                 aria-hidden="true"
@@ -542,8 +549,8 @@
               </a>
             </li> -->
             <li class="relative px-6 py-3">
-              
-              <router-link to="/addcoupon"
+              <!-- to="/addcoupon" -->
+              <router-link to="/"
                 @click="togglePagesMenu"
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 aria-haspopup="true"
@@ -593,13 +600,15 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <router-link class="w-full" to="/allcoupons">All Coupon</router-link>
+                  <!-- to="/allcoupons" -->
+                    <router-link class="w-full" to="/">All Coupon</router-link>
                   </li>
 
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <router-link class="w-full" to="/addcoupon">Add Coupon</router-link>
+                  <!-- to="/addcoupon" -->
+                    <router-link class="w-full" to="/">Add Coupon</router-link>
                   </li>
                   
                 </ul>
@@ -607,8 +616,8 @@
             </li>
 
             <li class="relative px-6 py-3">
-              
-              <router-link to="/allcategories"
+              <!-- to="/allcategories" -->
+              <router-link to="/"
                 @click="togglePagesMenu1"
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 aria-haspopup="true"
@@ -658,7 +667,8 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <router-link class="w-full" to="/allcategories">All Category</router-link>
+                  <!-- to="/allcategories" -->
+                    <router-link class="w-full" to="/">All Category</router-link>
                   </li>
 
                   <li

@@ -253,8 +253,8 @@
             required
           >
             <option>Bangladesh</option>
-            <option>No</option>
-            <option>Maybe</option>
+            <!-- <option>No</option>
+            <option>Maybe</option> -->
           </select>
         </div>
         <div class="w-full md:w-2/4 px-3 mb-6 md:mb-0">
@@ -325,9 +325,11 @@
           </label>
           <div class="relative">
             <vee-field
+            disabled
               name="phone"
               id="phone"
               class="
+              opacity-50 cursor-not-allowed
                 focus:ring-indigo-500 focus:border-indigo-500
                 px-3
                 py-2

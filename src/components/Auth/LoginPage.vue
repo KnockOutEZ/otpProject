@@ -1,9 +1,9 @@
 <template>
   <div class="parent">
     <div class="flex flex-col justify-center items-center h-screen bg-gray-100 ">
-      <vee-form :validation-schema="loginschema" class="md:w-4/12 sm:w-screen bg-gray-50 p-10 rounded-lg">
+      <vee-form @submit.prevent :validation-schema="loginschema" class="md:w-4/12 sm:w-screen bg-gray-50 p-10 rounded-lg">
       <h1 class="font-bold text-xl mb-2">Please enter your number:</h1>
-     <vee-field v-model="message" placeholder="8801XXXXXXXXX" name="number" type="text"  id="mainInput" @input="lengthHandler()"
+     <vee-field v-model="message" placeholder="8801XXXXXXXXX" name="number" type="text"  id="mainInput" @keyup.enter="handleInput()" @input="lengthHandler()"
         class="border-2 transition duration-500 placeholder-indigo-400 focus:placeholder-transparent border-indigo-400 mb-1 w-full p-2 text-left text-indigo-400 bg-transparent rounded-md focus:outline-none "/><br/>
       <ErrorMessage class="text-red-600 w-full  text-center" name="number"/>
       <!-- <div class="w-full grid grid-cols-4 gap-4 mt-2" v-if="input == true" id="otp">
@@ -24,15 +24,16 @@
       :is-input-num="true"
       @on-change="handleOnChange"
       @on-complete="checkSubmitBtn"
+      @keyup.enter="handleInput()"
       v-model="otp"
     />
   </div>
-      <button v-if="resend" @click="resend1()" class="text-green-400 text-right w-full">Resend code?</button>
+      <button type="button" v-if="resend" @click="resend1()" class="text-green-400 text-right w-full">Resend code?</button>
       
       <vue-countdown v-if="timer"  :time=" 60 * 3 * 1000" v-slot="{ minutes, seconds }">
   Time Remaining：{{ minutes }} minutes, {{ seconds }} seconds.
 </vue-countdown>
-      <button id="submitButton" type="button" @click="handleInput()" :disabled = "isDisabled == true" 
+      <button id="submitButton" type="button" @click.prevent="handleInput()" :disabled = "isDisabled == true" 
               class="block w-full  text-white py-1.5 px-3 rounded transition mt-2
                " :class="btncolor">
               Submit
@@ -110,6 +111,8 @@ methods:{
                      // error.response.status Check status code
                      console.log(error)
                      this.otpSent = false
+                     this.btncolor = 'bg-red-600 hover:bg-red-700'
+                     this.isDisabled = !this.isDisabled;
 
                  }).finally(() => {
                      //Perform action in always
@@ -194,10 +197,8 @@ var doc = document.getElementById('mainInput')
     },
 
 checkSubmitBtn(value){
-  if(value.length == 4){
     this.isDisabled = !this.isDisabled
     console.log(value)
-  }
 },
 
     test(){
