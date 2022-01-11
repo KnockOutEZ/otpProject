@@ -190,24 +190,36 @@ export default {
     },
     statusChange(productId,index,status){
       console.log(productId,index,status)
+     this.$store.state.loader = true
+
       axios
       .patch(process.env.VUE_APP_API_URL + "products/" + productId,{status:status},{ withCredentials: true })
       .then((res) => {
         console.log(res);
+     this.$store.state.loader = false
+
       })
       .catch((error) => {
         console.log(error);
+     this.$store.state.loader = false
+
       });
     },
     requestProduct(productId){
       console.log(productId)
     },
     deleteProduct(data){
+     this.$store.state.loader = true
+
       console.log(data)
       axios
       .delete(process.env.VUE_APP_API_URL + "products/" + data, { withCredentials: true })
       .then((res) => {
+     this.$store.state.loader = false
+
         console.log(res)
+     this.$store.state.loader = false
+
       this.$router.go(0)
       })
       .catch((error) => {
@@ -224,6 +236,7 @@ export default {
             next()
           }else{
             next({ path: '/loginplease' });
+            alert("complete profile please")
           }
           
       }).catch((error) => {

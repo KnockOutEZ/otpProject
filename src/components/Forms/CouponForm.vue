@@ -227,6 +227,7 @@ export default {
             next()
           }else{
             next({ path: '/loginplease' });
+            alert("complete profile please")
           }
           
       }).catch((error) => {

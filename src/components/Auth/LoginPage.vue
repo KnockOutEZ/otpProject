@@ -3,8 +3,16 @@
     <div class="flex flex-col justify-center items-center h-screen bg-gray-100 ">
       <vee-form @submit.prevent :validation-schema="loginschema" class="md:w-4/12 sm:w-screen bg-gray-50 p-10 rounded-lg">
       <h1 class="font-bold text-xl mb-2">Please enter your number:</h1>
-     <vee-field v-model="message" placeholder="8801XXXXXXXXX" name="number" type="text"  id="mainInput" @keyup.enter="handleInput()" @input="lengthHandler()"
-        class="border-2 transition duration-500 placeholder-indigo-400 focus:placeholder-transparent border-indigo-400 mb-1 w-full p-2 text-left text-indigo-400 bg-transparent rounded-md focus:outline-none "/><br/>
+
+    <div class="relative text-gray-600 focus-within:text-gray-400 mb-2">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+        <span type="submit" class="p-2 mb-1 focus:outline-none focus:shadow-outline text-left text-indigo-400">
+          88
+        </span>
+      </span>
+      <vee-field v-model="message" placeholder="01XXXXXXXXX" name="number" type="text"  id="mainInput" @keyup.enter="handleInput()" @input="lengthHandler()"
+        class="border-2 transition duration-500 placeholder-indigo-400 focus:placeholder-transparent border-indigo-400 mb-1 w-full p-2 pl-8 text-left text-indigo-400 bg-transparent rounded-md focus:outline-none "/>
+    </div>
       <ErrorMessage class="text-red-600 w-full  text-center" name="number"/>
       <!-- <div class="w-full grid grid-cols-4 gap-4 mt-2" v-if="input == true" id="otp">
         <vee-field name="ist" class="border-2 transition duration-500 placeholder-gray-400 focus:placeholder-transparent border-gray-400 mb-1 w-full p-2 text-center text-gray-400 bg-transparent rounded-md focus:outline-none " type="text" id="ist" maxlength="1" v-on:keyup="clickevent()" />
@@ -69,7 +77,7 @@ export default {
   data(){
     return{
             loginschema: {
-        number: 'required|numeric|min:13|max:13',
+        number: 'required|numeric|min:11|max:11',
         // ist: 'required|numeric',
         // snd: 'required|numeric',
         // trd: 'required|numeric',
@@ -101,11 +109,14 @@ methods:{
   // },
 // https://sellbee-api.herokuapp.com/v1/auth/verify-otp
   numberMethod () {
-  axios.post(process.env.VUE_APP_API_URL + 'vendor/login', {number: this.message})
+     this.$store.state.loader = true
+  axios.post(process.env.VUE_APP_API_URL + 'vendor/login', {number: 88 + this.message})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
                      this.otpSent = true
+     this.$store.state.loader = false
+
                  })
                  .catch((error) => {
                      // error.response.status Check status code
@@ -113,6 +124,8 @@ methods:{
                      this.otpSent = false
                      this.btncolor = 'bg-red-600 hover:bg-red-700'
                      this.isDisabled = !this.isDisabled;
+     this.$store.state.loader = false
+
 
                  }).finally(() => {
                      //Perform action in always
@@ -124,15 +137,21 @@ methods:{
 // https://sellbee-api.herokuapp.com/v1/auth/verify-otp
 // {withCredentials:true}
           otpMethod () {
-  axios.post(process.env.VUE_APP_API_URL + 'vendor/verify-otp', {number: this.message,otp:this.otp},{withCredentials:true})
+     this.$store.state.loader = true
+
+  axios.post(process.env.VUE_APP_API_URL + 'vendor/verify-otp', {number:88 + this.message,otp:this.otp},{withCredentials:true})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
+     this.$store.state.loader = false
+
                      this.$store.commit('toggleAuthenticated')
     this.$router.push({ name: 'Dashboard' });
     console.log(res.data)
                  })
                  .catch((error) => {
+     this.$store.state.loader = false
+
                      // error.response.status Check status code
                      console.log(error)
                      console.log(this.otp)
@@ -148,7 +167,7 @@ methods:{
 handleInput() {
   var doc = document.getElementById('mainInput')
       const value = doc.value;
-      if (value && value.length == 13) {
+      if (value && value.length == 11) {
     
   this.timer = true
   this.input = true;
@@ -187,7 +206,7 @@ handleInput() {
     lengthHandler(){
 var doc = document.getElementById('mainInput')
       const value = doc.value;
-      if (value && value.length == 13) {
+      if (value && value.length == 11) {
         
         this.isDisabled = false
 

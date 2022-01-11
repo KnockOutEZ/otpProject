@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     isAuthenticated: !!localStorage.Authenticator,
-    profileComplete: false
+    profileComplete: false,
+    loader:false,
   },
   mutations: {
     toggleAuthenticated(state){

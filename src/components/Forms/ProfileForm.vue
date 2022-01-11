@@ -467,12 +467,14 @@ export default {
   methods: {
     daSubmit() {
       let country = document.getElementById("country").value
+     this.$store.state.loader = true
+
       axios
         .patch(
           process.env.VUE_APP_API_URL + "vendor/profile-update",
           {
             email: this.email,
-            number: this.phone,
+            // number: this.phone,
             firstName: this.firstName,
             lastName: this.lastName,
             address: this.address,
@@ -487,9 +489,13 @@ export default {
         .then((res) => {
           //Perform Success Action
           console.log(res);
+     this.$store.state.loader = false
+
           this.$router.push("/")
         })
         .catch((error) => {
+     this.$store.state.loader = false
+
           // error.response.status Check status code
           console.log(error);
           console.log(country);
@@ -502,6 +508,8 @@ export default {
   },
 
   mounted(){
+     this.$store.state.loader = true
+
 axios.get(process.env.VUE_APP_API_URL + 'vendor/get-me',{withCredentials:true})
         .then((res) => {
           let daResponse = res.data.data
@@ -515,6 +523,8 @@ if (daResponse.city) this.city = daResponse.city;
 if (daResponse.country) document.getElementById('country').value = daResponse.country;
 if (daResponse.postalCode) this.postalCode = daResponse.postalCode;
 if (daResponse.website) this.website = daResponse.website;
+     this.$store.state.loader = false
+
       }).catch((error) => {
         console.log(error)
 

@@ -76,6 +76,8 @@ export default {
         }
     },
     mounted(){
+     this.$store.state.loader = true
+
       axios
       .get(process.env.VUE_APP_API_URL + "products", { withCredentials: true })
       .then((res) => {
@@ -86,15 +88,23 @@ export default {
           console.log(products[i].name)
           this.options.push(products[i].name)
         }
+     this.$store.state.loader = false
+
       }).catch((error) => {
+     this.$store.state.loader = false
+
         console.log(error)
 });
 
  axios
       .get(process.env.VUE_APP_API_URL + "coupon", { withCredentials: true })
       .then((res) => {
+     this.$store.state.loader = false
+
         console.log(res);
       }).catch((error) => {
+     this.$store.state.loader = false
+
         console.log(error)
 })
     },
@@ -119,6 +129,7 @@ export default {
             next()
           }else{
             next({ path: '/loginplease' });
+            alert("complete profile please")
           }
           
       }).catch((error) => {

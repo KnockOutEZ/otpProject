@@ -650,6 +650,7 @@ chart.cursor.lineX.fill = am4core.color("#000000");
             next()
           }else{
             next({ path: '/loginplease' });
+            alert("complete profile please")
           }
           
       }).catch((error) => {

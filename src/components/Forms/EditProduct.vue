@@ -346,6 +346,7 @@ formData.append('inventory', values.quantity);
 formData.append('image', this.imageName );
 formData.append('description', this.editorData);
 formData.append('status', this.status);
+     this.$store.state.loader = true
 
 let routerId = this.$route.params.id
       axios.patch(process.env.VUE_APP_API_URL + 'products/'+ routerId,formData,{withCredentials:true})
@@ -354,12 +355,16 @@ let routerId = this.$route.params.id
                      console.log(res)
                      console.log(this.editorData)
                      this.$router.push("/")
+     this.$store.state.loader = false
+
 
                  })
                  .catch((error) => {
                      // error.response.status Check status code
                      console.log(this.imageName)
                      console.log(error)
+     this.$store.state.loader = false
+
 
                  }).finally(() => {
                      //Perform action in always
@@ -380,6 +385,7 @@ this.imageName = files[0]
   },
 
   mounted(){
+     this.$store.state.loader = true
     
     let routerId = this.$route.params.id
       axios.get(process.env.VUE_APP_API_URL + 'products/'+ routerId,{withCredentials:true})
@@ -398,6 +404,8 @@ this.imageName = files[0]
                      this.productId = response._id
                      console.log(this.status)
                      this.handleImages()
+     this.$store.state.loader = false
+
       //                fetch(this.image)
       // .then((e) => {
       //   return e.blob()
@@ -413,6 +421,8 @@ this.imageName = files[0]
                  .catch((error) => {
                      // error.response.status Check status code
                      console.log(error)
+     this.$store.state.loader = false
+
 
                  }).finally(() => {
                      //Perform action in always
@@ -429,6 +439,7 @@ this.imageName = files[0]
             next()
           }else{
             next({ path: '/loginplease' });
+            alert("complete profile please")
           }
           
       }).catch((error) => {

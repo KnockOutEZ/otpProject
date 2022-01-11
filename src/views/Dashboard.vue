@@ -335,10 +335,10 @@
           </div>
           <div class="px-6 my-2">
             <!-- opacity-50 cursor-not-allowed -->
-            <button
+            <button @click="location"
               class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg  focus:outline-none"
-            >
-              <a href="https://sellbee-user.netlify.app/#/" target="__black">Preview Shop</a>
+            :disabled= "$store.state.profileComplete">
+              <span target="__black">Preview Shop</span>
             </button>
           </div>
         </div>
@@ -984,6 +984,17 @@
         </main>
       </div>
     </div>
+
+
+      <div v-if="$store.state.loader == true" class="min-h-screen absolute top-0 bottom-0 left-0 right-0  flex justify-center items-center bg-white opacity-50">
+
+  <div class="loader bg-white p-5 rounded-full flex space-x-3">
+    <div class="w-5 h-5 bg-gray-800 rounded-full animate-bounce"></div>
+    <div class="w-5 h-5 bg-gray-800 rounded-full animate-bounce"></div>
+    <div class="w-5 h-5 bg-gray-800 rounded-full animate-bounce"></div>
+  </div>
+
+</div>
 </template>
 
 <script>
@@ -1029,6 +1040,9 @@ mounted(){
 })
   },
 methods:{
+  location(){
+window.location.href = "https://sellbee-user.netlify.app/#/";
+  },
   //   getThemeFromLocalStorage() {
   //   // if user already changed the theme, use it
   //   if (window.localStorage.getItem('dark')) {
@@ -1084,16 +1098,21 @@ methods:{
     },
 
     logOut(){
+     this.$store.state.loader = true
       
       axios.delete(process.env.VUE_APP_API_URL + 'vendor/logout',{withCredentials:true})
         .then((res) => {
                      //Perform Success Action
                      console.log(res)
                      location.reload(); 
+     this.$store.state.loader = false
+
                  })
                  .catch((error) => {
                      // error.response.status Check status code
                      console.log(error)
+     this.$store.state.loader = false
+
 
                  }).finally(() => {
                      //Perform action in always

@@ -154,6 +154,7 @@ export default {
             next()
           }else{
             next({ path: '/loginplease' });
+            alert("complete profile please")
           }
           
       }).catch((error) => {
@@ -166,13 +167,19 @@ export default {
       this.$router.push("/editproduct");
     },
     statusChange(productId,index,status){
+     this.$store.state.loader = true
+
       console.log(productId,index,status)
       axios
       .patch(process.env.VUE_APP_API_URL + "collections/" + productId,{status:status},{ withCredentials: true })
       .then((res) => {
+     this.$store.state.loader = false
+
         console.log(res);
       })
       .catch((error) => {
+     this.$store.state.loader = false
+
         console.log(error);
       });
     },
@@ -180,14 +187,20 @@ export default {
       console.log(productId)
     },
     deleteProduct(data){
+     this.$store.state.loader = true
+
       console.log(data)
       axios
       .delete(process.env.VUE_APP_API_URL + "collections/" + data, { withCredentials: true })
       .then((res) => {
+     this.$store.state.loader = false
+
         console.log(res)
       this.$router.go(0)
       })
       .catch((error) => {
+     this.$store.state.loader = false
+
         console.log(error);
       });
     }

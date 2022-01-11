@@ -328,16 +328,19 @@ formData.append('inventory', values.quantity);
 formData.append('image', this.imageName );
 formData.append('description', this.editorData);
 formData.append('status', this.status);
+     this.$store.state.loader = true
       axios.post(process.env.VUE_APP_API_URL + 'products',formData,{withCredentials:true})
                  .then((res) => {
                      //Perform Success Action
                      console.log(res)
                      this.$router.push("/summary")
+     this.$store.state.loader = false
                  })
                  .catch((error) => {
                      // error.response.status Check status code
                      console.log(values.title)
                      console.log(error)
+     this.$store.state.loader = false
 
                  }).finally(() => {
                      //Perform action in always
@@ -358,8 +361,10 @@ formData.append('status', this.status);
           // daResponse.email == undefined || daResponse.number ==undefined ||  daResponse.firstName ==undefined ||  daResponse.lastName==undefined ||  daResponse.address==undefined ||  daResponse.apartment==undefined ||  daResponse.city==undefined ||  daResponse.country==undefined ||  daResponse.postalCode==undefined || daResponse.website==undefined
           if(daResponse.isVerified == true){
             next()
+
           }else{
             next({ path: '/loginplease' });
+            alert("complete profile please")
           }
           
       }).catch((error) => {
