@@ -32,6 +32,10 @@
       <span v-html="data.value.description"></span>
     </template>
 
+    <template v-slot:status1="">
+      <span>Pending</span>
+    </template>
+
     <template v-slot:id="data">
       {{ data.value.id }}
     </template>
@@ -310,6 +314,12 @@ export default {
         {
           label: "Description",
           field: "description",
+          width: "10%",
+          sortable: true,
+        },
+        {
+          label: "Payment Status",
+          field: "status1",
           width: "10%",
           sortable: true,
         },
