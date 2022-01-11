@@ -56,13 +56,14 @@
 <script>
   import Multiselect from '@vueform/multiselect'
   import axios from "../../store/axios";
-
 export default {
+  
   components: {
       Multiselect,
     },
     data(){
         return{
+          profileComplete:false,
             categoryFormSchema:{
                     categoryName:'required'
             },
@@ -99,7 +100,25 @@ export default {
         console.log(error)
 })
       }
-    }
+    },
+
+     beforeRouteEnter(to, from, next) {
+           axios.get(process.env.VUE_APP_API_URL + 'vendor/get-me',{withCredentials:true})
+        .then((res) => {
+          let daResponse = res.data.data
+          // daResponse.email == undefined || daResponse.number ==undefined ||  daResponse.firstName ==undefined ||  daResponse.lastName==undefined ||  daResponse.address==undefined ||  daResponse.apartment==undefined ||  daResponse.city==undefined ||  daResponse.country==undefined ||  daResponse.postalCode==undefined || daResponse.website==undefined
+          if(daResponse.isVerified == true){
+            next()
+          }else{
+            next({ path: '/loginplease' });
+          }
+          
+      }).catch((error) => {
+        console.log(error)
+
+})
+},
+         
 }
 </script>
 

@@ -14,6 +14,7 @@ import AddCategories from '../components/Forms/AddCategories.vue'
 import AllCategories from '../components/Category/AllCategories.vue'
 import EditCategory from '../components/Forms/EditCategory.vue'
 import ErrorPage from '../components/Others/ErrorPage.vue'
+import LoginPlease from '../components/Others/LoginPlease.vue'
 import Analytics from '../components/Analytics/Analytics.vue'
 import Notifications from '../components/Others/Notifications.vue'
 
@@ -105,6 +106,11 @@ const routes = [
     path:'/404',
           name:'ErrorPage',
           component:ErrorPage
+  },
+  {
+    path:'/loginplease',
+          name:'LoginPlease',
+          component:LoginPlease
   },
   {
     path: '/:catchAll(.*)*',

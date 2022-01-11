@@ -76,6 +76,7 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import axios from "axios"
 
 am4core.useTheme(am4themes_animated);
 am4core.addLicense("ch-custom-attribution");
@@ -638,7 +639,24 @@ chart.cursor.lineX.fill = am4core.color("#000000");
     if (this.chart) {
       this.chart.dispose();
     }
-  }
+  },
+
+   beforeRouteEnter(to, from, next) {
+           axios.get(process.env.VUE_APP_API_URL + 'vendor/get-me',{withCredentials:true})
+        .then((res) => {
+          let daResponse = res.data.data
+          // daResponse.email == undefined || daResponse.number ==undefined ||  daResponse.firstName ==undefined ||  daResponse.lastName==undefined ||  daResponse.address==undefined ||  daResponse.apartment==undefined ||  daResponse.city==undefined ||  daResponse.country==undefined ||  daResponse.postalCode==undefined || daResponse.website==undefined
+          if(daResponse.isVerified == true){
+            next()
+          }else{
+            next({ path: '/loginplease' });
+          }
+          
+      }).catch((error) => {
+        console.log(error)
+
+})
+},
 
 }
 </script>
