@@ -144,7 +144,8 @@ methods:{
                      //Perform Success Action
                      console.log(res)
      this.$store.state.loader = false
-
+      localStorage.setItem("access-token", res.data.accessToken)
+      localStorage.setItem("refresh-token", res.data.refreshToken)
                      this.$store.commit('toggleAuthenticated')
     this.$router.push({ name: 'Dashboard' });
     console.log(res.data)

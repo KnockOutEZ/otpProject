@@ -10,7 +10,7 @@ import axios from "axios";
 const authTokenRefresh = async () => {
     try {
   
-      await axios.get(process.env.VUE_APP_API_URL + "vendor/refresh",{withCredentials:true});
+      await axios.get(process.env.VUE_APP_API_URL + "vendor/refresh",{data:{refreshToken:localStorage.getItem("refresh-token")}});
     } catch (err) {
       console.log(err);
     }
@@ -35,5 +35,14 @@ axiosJWT.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+
+axiosJWT.interceptors.request.use(function (config) {
+  // Do something before request is sent
+  config.headers.Authorization = "Bearer" + " " + localStorage.getItem("access-token")
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
 
 export default axiosJWT;

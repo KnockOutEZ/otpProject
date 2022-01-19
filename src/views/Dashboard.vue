@@ -1100,7 +1100,7 @@ window.location.href = "https://sellbee-user.netlify.app/#/";
     logOut(){
      this.$store.state.loader = true
       
-      axios.delete(process.env.VUE_APP_API_URL + 'vendor/logout',{withCredentials:true})
+      axios.delete(process.env.VUE_APP_API_URL + 'vendor/logout',{data:{refreshToken:localStorage.getItem("refresh-token")}})
         .then((res) => {
                      //Perform Success Action
                      console.log(res)
