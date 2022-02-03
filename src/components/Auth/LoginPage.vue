@@ -147,7 +147,7 @@ methods:{
       localStorage.setItem("access-token", res.data.accessToken)
       localStorage.setItem("refresh-token", res.data.refreshToken)
                      this.$store.commit('toggleAuthenticated')
-    this.$router.push({ name: 'Dashboard' });
+    window.location.href = '/dashboard'
     console.log(res.data)
                  })
                  .catch((error) => {
